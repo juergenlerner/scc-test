@@ -91,7 +91,7 @@ import android.widget.SearchView;
  * For smaller screens: show just either the list view or the detail view (yet to be implemented).
  *  
  *  A spinner in the action bar allows to switch between the various types of objects: 
- *  alters, attributes, ego. 
+ *  contacts, labels, ego. 
  *  
  *  
  * 
