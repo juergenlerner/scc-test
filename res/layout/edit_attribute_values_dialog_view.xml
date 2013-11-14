@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:padding="3sp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_attribute_values_dialog_title"
+        android:textColor="#000000"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/edit_attribute_values_attribute_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:singleLine="true"
+        android:textColor="#0000C2"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_attribute_values_assign_value_for"
+            android:textColor="#000000"
+			android:paddingRight="10sp"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/edit_attribute_values_name_of_selected_element"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/edit_attribute_values_assign_value_for_hint"
+            android:textColor="#C20000"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:id="@+id/edit_attribute_values_values_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+    
+    <Button 
+        android:id="@+id/edit_attribute_values_add_value_button"
+        android:text="@string/edit_attribute_values_add_value_button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5sp"/>
+
+    <TextView
+        android:id="@+id/edit_attribute_values_no_value_assigned"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_attribute_values_no_value_assigned_for"
+        android:textColor="#555555"
+        android:textStyle="bold"
+        android:padding="5sp"
+        android:textSize="22sp" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10sp"
+        >
+
+        <LinearLayout
+            android:id="@+id/edit_attribute_values_row_without_values"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
+</LinearLayout>

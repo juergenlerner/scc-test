@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/add_alter_alter_event_dialog_tiename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:textColor="#C20000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="editAlterAlterTies"
+            android:padding="10sp" >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/edit_alter_alter_tie_labels"
+                android:onClick="editAlterAlterTies"
+                android:src="@drawable/ic_button_edit" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10sp"
+                android:singleLine="true"
+                android:text="@string/edit_alter_alter_tie_labels"
+                android:textColor="#555555"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="addAlterAlterMemo"
+            android:padding="10sp" >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/add_alter_memo_button_text"
+                android:onClick="addAlterAlterMemo"
+                android:src="@drawable/ic_button_add_memo" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10sp"
+                android:singleLine="true"
+                android:text="@string/add_alter_memo_button_text"
+                android:textColor="#555555"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="addAlterAlterContactEvent"
+            android:padding="10sp" >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/add_alter_contact_event_button_text"
+                android:onClick="addAlterAlterContactEvent"
+                android:src="@drawable/ic_button_contact_event" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10sp"
+                android:singleLine="true"
+                android:text="@string/add_alter_contact_event_button_text"
+                android:textColor="#555555"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="exchangeSelectedAlters"
+            android:padding="10sp" >
+
+            <ImageButton
+                android:id="@+id/exchange_selected_alters_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/reverse_dyad_button_text"
+                android:onClick="exchangeSelectedAlters"
+                android:src="@drawable/ic_button_exchange_selected_alters" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10sp"
+                android:singleLine="true"
+                android:text="@string/reverse_dyad_button_text"
+                android:textColor="#555555"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        </TableLayout>
+
+</LinearLayout>

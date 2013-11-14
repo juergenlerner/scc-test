@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/add_alter_event_dialog_altername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:textColor="#C20000"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="addAlterMemo"
+            android:padding="10sp" >
+
+            <ImageButton
+                android:id="@+id/add_alter_memo_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/add_alter_memo_button_text"
+                android:onClick="addAlterMemo"
+                android:src="@drawable/ic_button_add_memo" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10sp"
+                android:singleLine="true"
+                android:text="@string/add_alter_memo_button_text"
+                android:textColor="#555555"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="addAlterContactEvent"
+            android:padding="10sp" >
+
+            <ImageButton
+                android:id="@+id/add_alter_contact_event_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/add_alter_contact_event_button_text"
+                android:onClick="addAlterContactEvent"
+                android:src="@drawable/ic_button_contact_event" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10sp"
+                android:singleLine="true"
+                android:text="@string/add_alter_contact_event_button_text"
+                android:textColor="#555555"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="2sp" >
+
+    <TextView
+        android:id="@+id/edit_ego_alter_attributes_dialog_attr_name"
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingRight="5sp"
+        android:textColor="#0000C2"
+        android:textSize="18sp"
+        android:singleLine="true"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/edit_ego_alter_attributes_table_image_direction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <FrameLayout
+        android:id="@+id/edit_ego_alter_attributes_dialog_value_container"
+        android:layout_width="0px"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:paddingRight="5sp" 
+        />
+
+    <ImageButton
+        android:id="@+id/remove_ego_alter_attribute_value_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#eeeeeeee"
+        android:contentDescription="@string/remove_attribute_value_button_text"
+        android:padding="5sp"
+        android:src="@drawable/ic_button_remove_attr_value" />
+
+</TableRow>

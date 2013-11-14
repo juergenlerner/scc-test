@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/chose_alter_operation_dialog_altername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:textColor="#C20000"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="renameAlter"
+            android:padding="10sp" >
+
+            <ImageButton
+                android:id="@+id/rename_alter_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/rename_alter_button_text"
+                android:onClick="renameAlter"
+                android:src="@drawable/ic_button_rename" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10sp"
+                android:singleLine="true"
+                android:text="@string/rename_alter_button_text"
+                android:textColor="#555555"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="updateLocalAlterData"
+            android:padding="10sp" >
+
+            <ImageButton
+                android:id="@+id/update_alter_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/update_local_alter_data_button_text"
+                android:onClick="updateLocalAlterData"
+                android:src="@drawable/ic_button_update" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10sp"
+                android:singleLine="true"
+                android:text="@string/update_local_alter_data_button_text"
+                android:textColor="#555555"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="removeAlter"
+            android:padding="10sp" >
+
+            <ImageButton
+                android:id="@+id/remove_alter_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/remove_alter_button_text"
+                android:onClick="removeAlter"
+                android:src="@drawable/ic_button_remove_alter" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10sp"
+                android:singleLine="true"
+                android:text="@string/remove_alter_button_text"
+                android:textColor="#555555"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

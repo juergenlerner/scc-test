@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:padding="5sp" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        android:text="@string/add_alter_dialog_title"
+        android:textColor="#000000"
+        android:textSize="22sp" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="pickAlterFromAddAlterDialog"
+            android:padding="5sp" >
+
+            <ImageButton
+                android:id="@+id/pick_alter_from_contacts_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/pick_alter_button_text"
+                android:onClick="pickAlterFromAddAlterDialog"
+                android:src="@drawable/ic_button_add_alter" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10sp"
+                android:singleLine="true"
+                android:text="@string/pick_alter_button_text"
+                android:textColor="#555555"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="suggestAlters"
+            android:padding="5sp" >
+
+            <ImageButton
+                android:id="@+id/suggest_alters_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/suggest_alter_button_text"
+                android:onClick="suggestAlters"
+                android:src="@drawable/ic_button_suggest_alters" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10sp"
+                android:singleLine="true"
+                android:text="@string/suggest_alter_button_text"
+                android:textColor="#555555"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5sp" >
+
+        <EditText
+            android:id="@+id/alter_name_editText"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/new_alter_name_edit_text_hint"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/add_alter_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_alter_button_text" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5sp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#DDDDDD"
+            android:padding="5sp"
+            android:text="@string/interview_type_settings_headline_text"
+            android:textColor="#555555"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5sp" >
+
+            <RadioButton
+                android:id="@+id/interview_type_settings_random"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/interview_type_settings_radiobutton_text_random"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/interview_type_settings_egonet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/interview_type_settings_radiobutton_text_egonet"
+                android:textSize="18sp" />
+        </RadioGroup>
+    </LinearLayout>
+
+</ScrollView>

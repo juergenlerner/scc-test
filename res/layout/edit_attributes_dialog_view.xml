@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/edit_attributes_dialog_headline"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:textColor="#C20000"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" >
+
+        <TableLayout
+            android:id="@+id/edit_attributes_dialog_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5sp" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/add_other_attrib_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_button_add_other_attr"
+        android:gravity="left"
+        android:text="@string/edit_attrib_dialog_add_other_attrib" />
+
+</LinearLayout>

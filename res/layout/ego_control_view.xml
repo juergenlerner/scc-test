@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent" 
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              android:padding="5sp" >
+
+    <TextView
+        android:id="@+id/ego_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#555555"
+        android:text="@string/ego_name_text" />
+    
+    <Button 
+        android:id="@+id/ego_control_show_detail_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ego_control_show_details_button_text"
+        android:onClick="showEgoDetailsFromEgoControl"
+        />
+
+
+</LinearLayout>

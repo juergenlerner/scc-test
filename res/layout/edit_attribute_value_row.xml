@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView
+        android:id="@+id/edit_attribute_value_row_value_field"
+        android:layout_width="0px"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="5sp"
+        android:textColor="#555555"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <HorizontalScrollView
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5" >
+
+        <LinearLayout
+            android:id="@+id/edit_attribute_value_row_elements_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
+</TableRow>

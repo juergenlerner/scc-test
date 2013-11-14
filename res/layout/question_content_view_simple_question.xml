@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/question_content_view_simple_question_text"
+    android:textSize="18sp"
+    android:textColor="#555555"
+    android:textStyle="bold"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    />
+    

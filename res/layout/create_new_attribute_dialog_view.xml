@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#0000C2"
+        android:text="@string/create_new_general_attribute_headline"
+        android:padding="10sp"
+        android:textSize="22sp" 
+        />
+
+    <EditText
+        android:id="@+id/new_general_attribute_name_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EEEEEE"
+        android:hint="@string/create_new_attribute_name_hint"
+        android:singleLine="true"
+        android:padding="10sp"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/new_general_attribute_desc_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/create_new_attribute_desc_hint"
+        android:padding="10sp"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5sp" >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="10sp"
+            android:text="@string/select_attribute_domain"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/new_general_attribute_domain_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/new_general_attribute_direction_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5sp" >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="10sp"
+            android:text="@string/select_attribute_direction_type"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/new_general_attribute_direction_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5sp" >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="10sp"
+            android:text="@string/select_attribute_type"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/new_general_attribute_type_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/new_general_attribute_choice_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5sp" >
+
+        <EditText
+            android:id="@+id/new_general_attribute_choice_edit_text"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:hint="@string/new_attribute_choice_hint"
+            android:paddingRight="10sp"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/add_new_general_attribute_choice_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_attribute_choice_button_text" />
+    </LinearLayout>
+    
+    <ListView 
+        android:id="@+id/new_general_attribute_choices_list"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"/>
+
+</LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5sp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/up_to_all_alter_ties_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/up_to_all_alter_ties_button_text"
+            android:padding="10sp"
+            android:src="@drawable/ic_button_up" />
+
+        <TextView
+            android:id="@+id/ego_alter_detail_view_alter_name"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5sp"
+            android:textColor="#C20000"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
+        
+        </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" >
+
+        <TableLayout
+            android:id="@+id/detail_view_ego_alter_ties_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2sp"
+            android:shrinkColumns="2" />
+    </ScrollView>
+
+</LinearLayout>

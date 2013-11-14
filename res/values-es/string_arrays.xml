@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string-array name="alter_alter_attribute_relation_choices">
+        <item>esposo/a - pareja</item>
+        <item>familia</item>
+        <item>vecino</item>
+        <item>desde la infancia</item>
+        <item>colegio - instituto o universidad</item>
+        <item>compañero/a de trabajo</item>
+        <item>supervisor/a</item>
+        <item>subordinado/a</item>
+        <item>contacto de trabajo (cliente, etc)</item>
+        <item>amigo/a</item>
+        <item>ocio (club deportivo, etc)</item>
+        <item>otra relación</item>
+        <item>sin relación</item>
+    </string-array>
+    
+    <string-array name="alter_alter_attribute_valuation_choices">
+        <item>simpatizan mucho</item>
+        <item>simpatizan bastante</item>
+        <item>neutral</item>
+        <item>un poco distantes</item>
+        <item>muy distantes</item>
+        <item>no lo sé</item>
+    </string-array>
+    
+    <string-array name="alter_attribute_gender_choices">
+        <item>hombre</item>
+        <item>mujer</item>
+    </string-array>
+    
+    <string-array name="alter_attribute_would_help_actively_choices">
+        <item>seguro</item>
+        <item>puede ser</item>
+        <item>probablemente no</item>
+        <item>seguro que no</item>
+        <item>no lo sé</item>
+    </string-array>
+    
+    <string-array name="alter_attribute_would_help_financially_choices">
+        <item>seguro</item>
+        <item>puede ser</item>
+        <item>ayudaría pero ahora mismo no está en condiciones</item>
+        <item>no tiene recursos</item>
+        <item>probablemente no</item>
+        <item>seguro que no</item>
+        <item>no lo sé</item>
+    </string-array>
+    
+    <string-array name="ego_alter_attribute_importance_choices">
+        <item>muy importante</item>
+        <item>bastante importante</item>
+        <item>un poco importante</item>
+        <item>nada importante</item>
+        <item>no lo sé</item>
+    </string-array>
+    
+    <string-array name="ego_alter_attribute_relation_choices">
+       <item>esposo/a - pareja</item>
+        <item>familia</item>
+        <item>vecino</item>
+        <item>desde la infancia</item>
+        <item>colegio - instituto o universidad</item>
+        <item>compañero/a de trabajo</item>
+        <item>supervisor/a</item>
+        <item>subordinado/a</item>
+        <item>contacto de trabajo (cliente, etc)</item>
+        <item>amigo/a</item>
+        <item>ocio (club deportivo, etc)</item>
+        <item>otra relación</item>
+        <item>sin relación</item>
+    </string-array>
+    
+    <string-array name="ego_alter_attribute_valuation_choices">
+        <item>simpatizan mucho</item>
+        <item>simpatizan bastante</item>
+        <item>neutral</item>
+        <item>un poco distantes</item>
+        <item>muy distantes</item>
+        <item>no lo sé</item>
+    </string-array>
+    
+    <string-array name="ego_attribute_gender_choices">
+        <item>hombre</item>
+        <item>mujer</item>
+    </string-array>
+    
+    <string-array name="secondary_attribute_contact_atmosphere_choices">
+        <item>muy agradable</item>
+        <item>agradable</item>
+        <item>neutral</item>
+        <item>incómoda</item>
+        <item>muy incómoda</item>
+        <item>no lo sé - sin sensaciones en particular</item>
+    </string-array>
+
+    <string-array name="secondary_attribute_contact_content_choices">
+        <item>intercambio de información</item>
+        <item>saludos</item>
+        <item>conversación - charla</item>
+        <item>acuerdo</item>
+        <item>negociación</item>
+        <item>proporcionando apoyo emocional</item>
+        <item>ayudando activamente</item>
+        <item>participando en la misma actividad</item>
+        <item>rutina</item>
+        <item>otra</item>
+    </string-array>
+    <string-array name="secondary_attribute_contact_form_choices">
+        <item>personalmente</item>
+        <item>@string/secondary_attribute_contact_form_choices_item_phone</item>
+        <item>email</item>
+        <item>otro contacto de internet</item>
+        <item>video conferencia</item>
+        <item>correo postal</item>
+        <item>otro</item>
+    </string-array>
+
+    <string name="secondary_attribute_contact_form_choices_item_phone">phone, voice chat, etc</string>
+</resources>

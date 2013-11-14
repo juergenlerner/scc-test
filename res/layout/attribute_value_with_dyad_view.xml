@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    >
+
+    <TextView
+        android:id="@+id/attribute_value_with_dyad_value_field"
+        android:layout_width="0px"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textColor="#555555"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/attribute_value_with_dyad_source_field"
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:paddingLeft="3sp"
+        android:textColor="#C20000"
+        android:textSize="18sp" 
+        android:layout_marginBottom="2sp"/>
+
+    <TextView
+        android:text="@string/alter_separator_character"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingLeft="5sp"
+        android:paddingRight="5sp"
+        android:textColor="#C20000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/attribute_value_with_dyad_target_field"
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:textColor="#C20000"
+        android:textSize="18sp" 
+        android:layout_marginBottom="2sp"/>
+
+</TableRow>

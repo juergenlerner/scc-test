@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5sp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/detail_view_alter_name"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/alter_detail_no_alter_selected_hint"
+            android:padding="5sp"
+            android:textColor="#C20000"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/chose_alter_operation_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/chose_alter_operation_button_text"
+            android:onClick="choseAlterOperation"
+            android:padding="10sp"
+            android:src="@drawable/ic_button_menu_overflow" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#DDDDDD"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/alter_events_headline"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/events_headline"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <ImageButton
+                    android:id="@+id/expand_alter_events_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/expand_memos_button_text" />
+
+                <ImageButton
+                    android:id="@+id/add_alter_event_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/add_alter_event_button_text"
+                    android:onClick="addAlterEvent"
+                    android:src="@drawable/ic_button_plus" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detail_view_alter_events_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="2sp"
+                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#DDDDDD"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/alter_attrib_headline"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/alter_attrib_headline"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <ImageButton
+                    android:id="@+id/expand_alter_attrib_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/expand_alter_attrib_button_text" />
+
+                <ImageButton
+                    android:id="@+id/edit_alter_attrib_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/edit_alter_attrib_button_text"
+                    android:onClick="editAlterAttributes"
+                    android:src="@drawable/ic_button_edit" />
+            </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/detail_view_alter_attributes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#DDDDDD"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ego_alter_ties_headline"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <ImageButton
+                    android:id="@+id/expand_ego_alter_ties_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/expand_ego_alter_ties_button_text" />
+
+                <ImageButton
+                    android:id="@+id/edit_ego_alter_ties_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/edit_ego_alter_ties_button_text"
+                    android:onClick="editEgoAlterTies"
+                    android:src="@drawable/ic_button_edit" />
+            </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/detail_view_ego_alter_ties"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2sp"
+                android:shrinkColumns="2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#DDDDDD"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/alter_ties_headline"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <ImageButton
+                    android:id="@+id/expand_alter_alter_ties_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/expand_alter_alter_ties_button_text" />
+
+                <ImageButton
+                    android:id="@+id/edit_alter_ties_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/edit_alter_ties_button_text"
+                    android:src="@drawable/ic_button_edit" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/detail_view_alter_alter_ties_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

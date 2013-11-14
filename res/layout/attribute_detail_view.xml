@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5sp" >
+
+    <LinearLayout
+        android:id="@+id/attrib_name_and_remove_attrib"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/detail_view_attrib_name"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/attrib_detail_no_attrib_selected_hint"
+            android:textColor="#0000C2"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/edit_attribute_structure_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/edit_attribute_structure_button_text"
+            android:onClick="editAttributeStructure"
+            android:src="@drawable/ic_button_edit" />
+
+        <ImageButton
+            android:id="@+id/remove_attribute_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/remove_attribute_button_text"
+            android:onClick="removeAttribute"
+            android:src="@drawable/ic_button_remove_alter" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#DDDDDD"
+                android:orientation="vertical" 
+                android:layout_marginBottom="5sp"
+                android:padding="5sp">
+
+                <TextView
+                    android:id="@+id/attribute_description_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/no_attribute_description_hint"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1" >
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp"
+                        android:paddingTop="10sp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/attribute_domain"
+                            android:textColor="#555555"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/attribute_domain_text_view"
+                            android:layout_width="0px"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="10sp"
+                            android:textColor="#000000"
+                            android:textSize="18sp"
+                            android:textStyle="normal" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10sp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/attribute_type"
+                            android:textColor="#555555"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/attribute_type_text_view"
+                            android:layout_width="0px"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="10sp"
+                            android:textColor="#000000"
+                            android:textSize="18sp"
+                            android:textStyle="normal" />
+                    </TableRow>
+                </TableLayout>
+
+                <TextView
+                    android:id="@+id/attribute_choices_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/attribute_values_headline"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/attribute_values_headline"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <ImageButton
+                    android:id="@+id/edit_attribute_values_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_button_edit"
+                    android:contentDescription="@string/edit_attribute_values_button_text" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/attribute_detail_view_values_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                 />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

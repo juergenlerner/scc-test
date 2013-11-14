@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5sp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/up_to_all_alter_ties_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/up_to_all_alter_ties_button_text"
+            android:padding="5sp"
+            android:src="@drawable/ic_button_up" />
+
+        <TextView
+            android:id="@+id/detail_view_second_alter_name"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5sp"
+            android:textColor="#C20000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/chose_alter_alter_operation_button_text"
+            android:onClick="addAlterAlterEvent"
+            android:padding="5sp"
+            android:src="@drawable/ic_button_menu_overflow" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/alter_alter_tie_detail_view_events_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="2sp" />
+
+            <TableLayout
+                android:id="@+id/detail_view_alter_alter_ties_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

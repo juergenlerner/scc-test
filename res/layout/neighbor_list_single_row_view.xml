@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingBottom="5sp"
+    android:paddingLeft="5sp"
+    android:paddingTop="5sp" 
+    android:clickable="true"
+    android:focusable="true"
+    >
+ 
+    <TextView
+        android:id="@+id/neighbor_list_single_row_field_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#C20000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+ 
+    <TextView
+        android:id="@+id/neighbor_list_single_row_field_attribute"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+ 
+</LinearLayout>

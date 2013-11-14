@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/add_new_attribute_4ego_alter_headline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:textColor="#C20000"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/add_new_attribute_4ego_alter_list"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/create_new_attribute_from_edit_ego_alter_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_button_create_new_attribute"
+        android:gravity="left"
+        android:text="@string/edit_alter_attrib_dialog_create_new_label" />
+
+</LinearLayout>

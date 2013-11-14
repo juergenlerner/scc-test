@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5sp" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#DDDDDD"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/ego_memos_headline"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/memos_headline"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <ImageButton
+                    android:id="@+id/expand_ego_memos_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/expand_memos_button_text" />
+
+                <ImageButton
+                    android:id="@+id/add_ego_memo_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/add_ego_memo_button_text"
+                    android:onClick="addEgoMemo"
+                    android:src="@drawable/ic_button_add_memo" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detail_view_ego_memos_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="2sp"
+                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#DDDDDD"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/ego_attrib_headline"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ego_attrib_headline"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <ImageButton
+                    android:id="@+id/expand_ego_attrib_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/expand_ego_attrib_button_text" />
+
+                <ImageButton
+                    android:id="@+id/edit_ego_attrib_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/edit_ego_attrib_button_text"
+                    android:onClick="editEgoAttributes"
+                    android:src="@drawable/ic_button_edit" />
+            </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/detail_view_ego_attributes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2sp"
+                android:shrinkColumns="1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#DDDDDD"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ego_alter_ties_headline_from_ego_view"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <ImageButton
+                    android:id="@+id/expand_ego_alter_ties_from_ego_view_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/expand_ego_alter_ties_button_text" />
+
+                <ImageButton
+                    android:id="@+id/edit_ego_alter_ties_from_ego_view_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/edit_ego_alter_ties_button_text"
+                    android:src="@drawable/ic_button_edit" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/ego_detail_view_ego_alter_ties_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

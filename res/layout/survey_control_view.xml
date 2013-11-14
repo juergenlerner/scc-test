@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent" 
+              android:layout_height="fill_parent"
+              android:padding="5sp" 
+              android:orientation="vertical">
+              
+    <TextView android:id="@+id/survey_control_headline_textview"
+        	  android:layout_width="wrap_content"
+        	  android:layout_height="wrap_content"
+        	  android:text="@string/survey_control_headline"
+        	  android:textSize="22sp"
+        	  />
+    
+    <Button android:id="@+id/load_survey_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/load_survey_button_text" 
+            android:onClick="loadSurvey"/>
+
+    <Button android:id="@+id/goto_survey_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goto_survey_button_text" 
+            />
+
+    
+</LinearLayout>
