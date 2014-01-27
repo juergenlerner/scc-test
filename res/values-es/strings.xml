@@ -28,6 +28,8 @@
     <string name="alter_attribute_city_description">Ciudad donde esta persona vive (principalmente).</string>
     <string name="alter_attribute_gender_name">Género</string>
     <string name="alter_attribute_gender_description">Género de este contacto. </string>
+    <string name="alter_attribute_gender_woman">mujer</string>
+    <string name="alter_attribute_gender_man">hombre</string>
     <string name="alter_attribute_occupation_name">Ocupación</string>
     <string name="alter_attribute_occupation_description">Ocupación principal de este contacto. </string>
     <string name="alter_attribute_would_help_actively_name">Apoyo activo</string>
@@ -139,6 +141,10 @@
     <string name="goto_survey_button_text">Empezar/continuar la encuesta</string>
     <string name="history_control_show_details_button_text">Muestra la historia</string>
     <string name="history_view_attribute_headline">Etiquetas</string>
+    <string name="statistics_control_text">Estadísticas</string>
+    <string name="statistics_control_show_gender">Estadísticas sobre género</string>
+    <string name="statistics_control_show_density">Estadísticas sobre densidad</string>
+    <string name="statistics_control_ideal_case_text">Definir caso ideal</string>
     <string name="interview_headline_text">Pregunta siguiente:</string>
     <string name="interview_type_settings_headline_text">Typo de entrevista</string>
     <string name="interview_type_settings_radiobutton_text_random">Entrevista aleatoria</string>
@@ -150,9 +156,11 @@
     <string name="menu_add_alter">Añadir contacto</string>
     <string name="menu_export_history_graphml">Exportar GraphML</string>
     <string name="menu_import_history_graphml">Importar GraphML</string>
+    <string name="menu_import_int_file">Importar entrevista de Egonet</string>
     <string name="menu_history">Vista de la historia</string>
     <string name="menu_interview">Entrevístame</string>
     <string name="menu_network_view">Vista de red</string>
+    <string name="menu_statistics_view">Estadísticas de la red</string>
     <string name="menu_settings">Configuración</string>
     <string name="modify_time_button_text">Cambiar fecha/hora</string>
     <string name="new_alter_name_edit_text_hint">Introducir nombre manualmente</string>
@@ -189,6 +197,7 @@
     <string name="select_attribute_domain">Seleccionar dominio de la etiqueta: </string>
     <string name="select_attribute_type">Seleccionar tipo de etiqueta: </string>
     <string name="select_ego_file_dialog_title">Seleccionar cuestionario (.ego file)</string>
+    <string name="select_int_file_dialog_title">Seleccionar entrevista (.int file)</string>
     <string name="select_graphml_file_dialog_title">Seleccionar fichero GraphML (.graphml)</string>
     <string name="set">Set</string>
     <string name="skip_to_next_question_button_text">Pasa al siguiente</string>
@@ -210,6 +219,6 @@
     <string name="view_label_history">Historia</string>
     <string name="view_label_network">Red</string>
     <string name="view_label_survey">Entrevista</string>
-    <string name="view_label_search">Buscar</string>    
-    
+    <string name="view_label_search">Buscar</string>  
+    <string name="view_label_statistics">Estadísticas</string>  
 </resources>

@@ -40,10 +40,22 @@
         android:orderInCategory="42"
         android:showAsAction="never"
         android:title="@string/menu_import_history_graphml"/>
+    <item 
+        android:id="@+id/menu_import_int_file"
+        android:orderInCategory="43"
+        android:showAsAction="never"
+        android:title="@string/menu_import_int_file"/>
+    <item 
+        android:id="@+id/menu_statistics_view"
+        android:orderInCategory="50"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_statistics_img"
+        android:title="@string/menu_statistics_view"/>
     <item
         android:id="@+id/menu_settings"
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/menu_settings"/>
+    
 
 </menu>

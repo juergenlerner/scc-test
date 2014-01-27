@@ -29,6 +29,8 @@
     <string name="alter_attribute_city_description">City where this contact (mainly) lives.</string>
     <string name="alter_attribute_gender_name">Gender</string>
     <string name="alter_attribute_gender_description">Gender of this contact. </string>
+    <string name="alter_attribute_gender_woman">woman</string>
+    <string name="alter_attribute_gender_man">man</string>
     <string name="alter_attribute_occupation_name">Occupation</string>
     <string name="alter_attribute_occupation_description">Main occupation of this contact. </string>
     <string name="alter_attribute_would_help_actively_name">Active support</string>
@@ -140,6 +142,10 @@
     <string name="goto_survey_button_text">Start/continue survey</string>
     <string name="history_control_show_details_button_text">Show history</string>
     <string name="history_view_attribute_headline">Labels</string>
+    <string name="statistics_control_text">Statistics</string>
+    <string name="statistics_control_show_gender">Gender statistics</string>
+    <string name="statistics_control_show_density">Density statistics</string>
+    <string name="statistics_control_ideal_case_text">Set ideal case</string>
     <string name="interview_headline_text">Next question:</string>
     <string name="interview_type_settings_headline_text">Interview type</string>
     <string name="interview_type_settings_radiobutton_text_random">Randomized interview</string>
@@ -151,10 +157,12 @@
     <string name="menu_add_alter">Add contact</string>
     <string name="menu_export_history_graphml">Export GraphML</string>
     <string name="menu_import_history_graphml">Import GraphML</string>
+    <string name="menu_import_int_file">Import Egonet interview</string>
     <string name="menu_history">History view</string>
     <string name="menu_interview">Interview me</string>
     <string name="menu_network_view">Network view</string>
-    <string name="menu_settings">Settings</string>
+    <string name="menu_statistics_view">Statistics view</string>   
+    <string name="menu_settings">Settings</string>   
     <string name="modify_time_button_text">Change date/time</string>
     <string name="new_alter_name_edit_text_hint">Manually enter name</string>
     <string name="new_attribute_choice_hint">Enter new value choice (click to remove)</string>
@@ -190,6 +198,7 @@
     <string name="select_attribute_domain">Select label domain: </string>
     <string name="select_attribute_type">Select label type: </string>
     <string name="select_ego_file_dialog_title">Select questionnaire (.ego file)</string>
+    <string name="select_int_file_dialog_title">Select interview (.int file)</string>
     <string name="select_graphml_file_dialog_title">Select GraphML file (.graphml)</string>
     <string name="set">Set</string>
     <string name="skip_to_next_question_button_text">Skip to next</string>
@@ -212,5 +221,5 @@
     <string name="view_label_network">Network</string>
     <string name="view_label_survey">Interview</string>
     <string name="view_label_search">Search</string>
-    
+    <string name="view_label_statistics">Statistics</string>   
 </resources>

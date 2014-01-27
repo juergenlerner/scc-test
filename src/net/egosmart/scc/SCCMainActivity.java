@@ -24,6 +24,9 @@ import net.egosmart.scc.gui.NetworkControlFragment;
 import net.egosmart.scc.gui.NetworkViewFragment;
 import net.egosmart.scc.gui.SearchControlFragment;
 import net.egosmart.scc.gui.SearchViewFragment;
+import net.egosmart.scc.gui.StatisticsControlFragment;
+import net.egosmart.scc.gui.StatisticsViewDensityFragment;
+import net.egosmart.scc.gui.StatisticsViewGenderFragment;
 import net.egosmart.scc.gui.SurveyControlFragment;
 import net.egosmart.scc.gui.SurveyFragment;
 import net.egosmart.scc.gui.dialog.AddAlterAlterContactEventDialog;
@@ -50,6 +53,7 @@ import net.egosmart.scc.gui.dialog.RenameAlterDialog;
 import net.egosmart.scc.gui.dialog.SelectHistoryOutputGraphMLFileDialog;
 import net.egosmart.scc.gui.dialog.SelectInputEgoFileDialog;
 import net.egosmart.scc.gui.dialog.SelectInputGraphMLFileDialog;
+import net.egosmart.scc.gui.dialog.SelectInputIntFileDialog;
 import net.egosmart.scc.gui.dialog.SelectOutputGraphMLFileDialog;
 import net.egosmart.scc.gui.dialog.SuggestAltersDialog;
 import net.egosmart.scc.gui.util.DynamicViewManager;
@@ -110,6 +114,7 @@ android.view.View.OnClickListener {
 	public static final String LAST_VIEW_LABEL_SEARCH = "search";
 	public static final String LAST_VIEW_LABEL_SURVEY = "survey";
 	public static final String LAST_VIEW_LABEL_HISTORY = "history";
+	public static final String LAST_VIEW_LABEL_STATISTICS="statistics";
 	public static final String LAST_VIEW_LABEL_EGO = "ego";
 	public static final String LAST_VIEW_LABEL_ALTER = "alter";
 	public static final String LAST_VIEW_LABEL_ATTRIBUTE = "attribute";
@@ -129,9 +134,18 @@ android.view.View.OnClickListener {
 	private static final String SEARCH_CONTROL_FRAGMENT_TAG = "search_control_fragment_tag";
 	private static final String HISTORY_VIEW_FRAGMENT_TAG = "history_view_fragment_tag";
 	private static final String HISTORY_CONTROL_FRAGMENT_TAG = "history_control_fragment_tag";
+	private static final String STATISTICS_CONTROL_FRAGMENT_TAG = "statistics_control_fragment_tag";
+	private static final String STATISTICS_VIEW_GENDER_FRAGMENT_TAG = "statistics_view_gender_fragment_tag";
+	private static final String STATISTICS_VIEW_DENSITY_FRAGMENT_TAG = "statistics_view_density_fragment_tag";
 	private static final String SURVEY_CONTROL_FRAGMENT_TAG = "survey_control_fragment_tag";
 	private static final String SURVEY_FRAGMENT_TAG = "survey_fragment_tag";
 
+	/*
+	 * String constants defining the statistics view to show.
+	 */
+	private static final String STATISTICS_GENDER = "statistics_gender";
+	private static final String STATISTICS_DENSITY = "statistics_density";
+		
 	/*
 	 * Integer constants defining the ordering of elements in the view selection spinner in the action bar.
 	 */
@@ -150,6 +164,7 @@ android.view.View.OnClickListener {
 	 * String constants serving as identifying tags for various dialogs.
 	 */
 	public static final String SELECT_INPUT_EGO_FILE_DIALOG_TAG = "select_input_ego_file_dialog_tag";
+	public static final String SELECT_INPUT_INT_FILE_DIALOG_TAG = "select_input_int_file_dialog_tag";
 	public static final String SELECT_OUTPUT_GRAPHML_FILE_DIALOG_TAG = "select_output_graphml_file_dialog_tag";
 	public static final String SELECT_HISTORY_OUTPUT_GRAPHML_FILE_DIALOG_TAG = "select_history_output_graphml_file_dialog_tag";
 	public static final String SELECT_INPUT_GRAPHML_FILE_DIALOG_TAG = "select_input_graphml_file_dialog_tag";
@@ -279,6 +294,8 @@ android.view.View.OnClickListener {
 				lastDisplayViewLabel = getString(R.string.view_label_survey);
 			if(LAST_VIEW_LABEL_SEARCH.equals(lastViewLabel))
 				lastDisplayViewLabel = getString(R.string.view_label_search);
+			if(LAST_VIEW_LABEL_STATISTICS.equals(lastViewLabel))
+				lastDisplayViewLabel = getString(R.string.view_label_statistics);
 			actionBar.setTitle(lastDisplayViewLabel);
 			actionBar.setSubtitle("(" + lastTopDisplayLabel + ")");
 			actionBar.setDisplayHomeAsUpEnabled(true);
@@ -333,6 +350,10 @@ android.view.View.OnClickListener {
 				fragment = new HistoryControlFragment();
 				listFragmentTag = HISTORY_CONTROL_FRAGMENT_TAG;
 			}
+			if(LAST_VIEW_LABEL_STATISTICS.equals(lastViewLabel)){
+				fragment = new StatisticsControlFragment();
+				listFragmentTag = STATISTICS_CONTROL_FRAGMENT_TAG;
+			}
 			if(LAST_VIEW_LABEL_NETWORK.equals(lastViewLabel)){
 				fragment = new NetworkControlFragment();
 				listFragmentTag = NETWORK_CONTROL_FRAGMENT_TAG;
@@ -371,6 +392,10 @@ android.view.View.OnClickListener {
 			if(LAST_VIEW_LABEL_SURVEY.equals(lastViewLabel)){
 				fragment = new SurveyFragment();
 				detailFragmentTag = SURVEY_FRAGMENT_TAG;
+			}
+			if(LAST_VIEW_LABEL_STATISTICS.equals(lastViewLabel)){
+				fragment = new StatisticsViewGenderFragment();
+				detailFragmentTag = STATISTICS_VIEW_GENDER_FRAGMENT_TAG;
 			}
 			if(LAST_VIEW_LABEL_HISTORY.equals(lastViewLabel)){
 				fragment = new HistoryViewFragment();
@@ -415,6 +440,10 @@ android.view.View.OnClickListener {
 					fragment = new SurveyFragment();
 					fragmentTag = SURVEY_FRAGMENT_TAG;
 				}
+				if(LAST_VIEW_LABEL_STATISTICS.equals(lastViewLabel)){
+					fragment = new StatisticsViewGenderFragment();
+					fragmentTag = STATISTICS_VIEW_GENDER_FRAGMENT_TAG;
+				}
 				if(LAST_VIEW_LABEL_HISTORY.equals(lastViewLabel)){
 					fragment = new HistoryViewFragment();
 					fragmentTag = HISTORY_VIEW_FRAGMENT_TAG;
@@ -439,6 +468,10 @@ android.view.View.OnClickListener {
 				if(LAST_VIEW_LABEL_HISTORY.equals(lastViewLabel)){
 					fragment = new HistoryControlFragment();
 					fragmentTag = HISTORY_CONTROL_FRAGMENT_TAG;
+				}
+				if(LAST_VIEW_LABEL_STATISTICS.equals(lastViewLabel)){
+					fragment = new StatisticsControlFragment();
+					fragmentTag = STATISTICS_CONTROL_FRAGMENT_TAG;
 				}
 				if(LAST_VIEW_LABEL_NETWORK.equals(lastViewLabel)){
 					fragment = new NetworkControlFragment();
@@ -565,6 +598,12 @@ android.view.View.OnClickListener {
 		case R.id.menu_import_history_graphml:
 			importHistoryFromGraphML();
 			return true;
+		case R.id.menu_import_int_file:
+			importEgonetInterview();
+			return true;
+		case R.id.menu_statistics_view:
+			switchToStatisticsView(STATISTICS_GENDER);
+			return true;
 		case R.id.menu_settings:
 			openSettings();
 			return true;
@@ -690,7 +729,69 @@ android.view.View.OnClickListener {
 		if(LAST_VIEW_LABEL_EGO.equals(topLevelViewLabel))
 			switchToEgoView();
 	}
+	
+	/**
+	 * Shows the statistics view.
+	 */
+	private void switchToStatisticsView(String statisticsFragment) {
 
+		FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+		// Check that the activity is using the layout version with
+		// the list_container FrameLayout
+		if (findViewById(R.id.list_container) != null) {
+			
+			StatisticsControlFragment fragment = new StatisticsControlFragment();
+
+			// Replace the network fragment in the 'list_container' FrameLayout
+			if(!fragment.isVisible())
+				trans.replace(R.id.list_container, fragment, STATISTICS_CONTROL_FRAGMENT_TAG);
+		}
+		// Check that the activity is using the layout version with
+		// the view_container FrameLayout
+		if (findViewById(R.id.detail_container) != null) {
+			//Check which statistics fragment must be showed in the right fragment.
+			if(statisticsFragment.equals(STATISTICS_GENDER)) {
+				StatisticsViewGenderFragment fragment = new StatisticsViewGenderFragment();
+				// Replace the network fragment in the 'view_container' FrameLayout
+				if(!fragment.isVisible())
+					trans.replace(R.id.detail_container, fragment, STATISTICS_VIEW_GENDER_FRAGMENT_TAG);
+			}
+			if(statisticsFragment.equals(STATISTICS_DENSITY)){
+				StatisticsViewDensityFragment fragment = new StatisticsViewDensityFragment();
+				// Replace the network fragment in the 'view_container' FrameLayout
+				if(!fragment.isVisible())
+					trans.replace(R.id.detail_container, fragment, STATISTICS_VIEW_DENSITY_FRAGMENT_TAG);
+			}			
+		}
+		// Check that the activity is using the layout version with
+		// the single_pane_container
+		if (findViewById(R.id.single_pane_container) != null) {
+			if(SCCProperties.getInstance(this).getPropertyShowDetailInSinglePaneView()){
+				if (statisticsFragment.equals(STATISTICS_GENDER)) {
+					Fragment fragment = new StatisticsViewGenderFragment();
+					if(!fragment.isVisible())
+						trans.replace(R.id.single_pane_container, fragment, STATISTICS_VIEW_GENDER_FRAGMENT_TAG);
+				}
+				if (statisticsFragment.equals(STATISTICS_DENSITY)) {
+					Fragment fragment = new StatisticsViewDensityFragment();
+					if(!fragment.isVisible())
+						trans.replace(R.id.single_pane_container, fragment, STATISTICS_VIEW_DENSITY_FRAGMENT_TAG);
+
+				}
+			} else {
+				Fragment fragment = new StatisticsControlFragment();
+				if(!fragment.isVisible())
+					trans.replace(R.id.single_pane_container, fragment, STATISTICS_CONTROL_FRAGMENT_TAG);				
+			}
+		}
+		if(!trans.isEmpty()){
+			//trans.addToBackStack(null);
+			trans.commitAllowingStateLoss();
+		}
+		SCCProperties.getInstance(this).setPropertyLastViewLabel(LAST_VIEW_LABEL_STATISTICS);
+		setDisplayShowSecondLevelView();
+	}
+	
 	/**
 	 * Shows the search view.
 	 */
@@ -1066,6 +1167,30 @@ android.view.View.OnClickListener {
 		SCCProperties.getInstance(this).setPropertyShowDetailInSinglePaneView(true);
 		switchToHistoryView();
 	}
+	
+	/**
+	 * Shows gender statistics in the single pane.
+	 * 
+	 * Called from show gender statistics button in the statistics control view.
+	 * 
+	 * @param view 
+	 */
+	public void showGenderStatisticsFromStatisticsControl(View view){
+		SCCProperties.getInstance(this).setPropertyShowDetailInSinglePaneView(true);
+		switchToStatisticsView(STATISTICS_GENDER);
+	}
+	
+	/**
+	 * Shows density statistics in the single pane.
+	 * 
+	 * Called from show density statistics button in the statistics control view.
+	 * 
+	 * @param view 
+	 */
+	public void showDensityStatisticsFromStatisticsControl(View view){
+		SCCProperties.getInstance(this).setPropertyShowDetailInSinglePaneView(true);
+		switchToStatisticsView(STATISTICS_DENSITY);
+	}
 
 	/**
 	 * Opens the dialog to compose and add a new ego memo.
@@ -1422,6 +1547,22 @@ android.view.View.OnClickListener {
 		dialog.show(getSupportFragmentManager(), SELECT_INPUT_GRAPHML_FILE_DIALOG_TAG);
 	}
 
+	/*
+	 * Opens the select output int file dialog.
+	 */
+	private void importEgonetInterview() {
+		DialogFragment dialog = SelectInputIntFileDialog.getInstance(this);
+		dialog.show(getSupportFragmentManager(), SELECT_INPUT_INT_FILE_DIALOG_TAG);
+	}
+	
+	/**
+	 * Reads an interview from an int file.
+	 * @param intFile
+	 */
+	public void loadInterviewFromFile(File intFile){
+		PersonalNetwork.getInstance(this).importEgonetInterview(intFile);
+	}
+	
 	/**
 	 * Writes the PersonalNetwork to the specified file in GraphML format.
 	 * @param file
