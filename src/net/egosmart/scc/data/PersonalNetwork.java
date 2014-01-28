@@ -4494,6 +4494,34 @@ public class PersonalNetwork{
 	}
 
 	/**
+	 * Reads the content of the int file to show statistics about it.
+	 * 
+	 * @param file Int file with the Egonet interview.
+	 */
+	public void importEgonetInterview(File file){
+		SAXParserFactory saxfactory = SAXParserFactory.newInstance();
+		SAXParser saxparser;
+		try {
+			saxparser = saxfactory.newSAXParser();
+			DefaultHandler handler = new ImportIntHandler();
+			db.beginTransaction();
+			saxparser.parse(file, handler);
+			db.setTransactionSuccessful();
+		} catch (ParserConfigurationException e) {
+			Log.e("Import int", e.getMessage());
+			e.printStackTrace();
+		} catch (SAXException e) {
+			Log.e("Import int", e.getMessage());
+			e.printStackTrace();
+		} catch (IOException e) {
+			Log.e("Import int", e.getMessage());
+			e.printStackTrace();
+		} finally {
+			db.endTransaction();
+		}
+	}
+	
+	/**
 	 * Reads the content of the GraphML file and merges it into the current network history
 	 * (which does not have to be empty before import).
 	 * 
@@ -4523,6 +4551,117 @@ public class PersonalNetwork{
 
 	}
 
+	//Handler for importing egonet interviews to application. 
+	private class ImportIntHandler extends DefaultHandler {
+		
+		//names of XML elements
+		private static final String elem_name = "Name";
+		private static final String elem_index = "Index";
+		private static final String elem_adjacent = "Adjacent";
+		private static final String elem_time_stamp = "TimeStamp";
+		private static final String elem_alters = "Alters";
+		private static final String elem_complete = "Complete";
+		
+		//names of XML attributes		
+		//attributes of Index
+		private static final String index_name = "name";
+		
+		//counter to know how many alters are in a concrete answer (1 or 2).
+		int numNames;		
+		String parsedValue;
+		boolean areAdjacent;
+		TimeInterval interval;
+		
+		//Vector containing parsed alter names.
+		String[] alterPair;
+		private DateFormat formatter;
+		
+		
+		ImportIntHandler(){
+		}
+
+		@Override
+		public void startDocument() throws SAXException {
+			numNames = 0;
+			//formatter = new SimpleDateFormat("dd-MM-yyyy");
+			alterPair = new String[2];
+			areAdjacent = false;
+			interval = TimeInterval.getRightUnbounded(System.currentTimeMillis());
+		}
+		
+		@Override
+		public void endDocument() {
+			//TODO:
+		}
+		
+		@Override
+		public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException{
+			if(elem_alters.equals(localName))
+				startAlters(atts);
+			if(elem_index.equals(localName))
+				startIndex(atts);
+		}
+		
+		@Override
+		public void endElement(String uri, String localName, String qName) throws SAXException {
+			if(elem_name.equals(localName))
+				endName();
+			if(elem_alters.equals(localName))
+				endAlters();
+			if(elem_adjacent.equals(localName))
+				endAdjacent();
+		}
+		
+		@Override
+		public void characters(char[] ch, int start, int length) throws SAXException {
+			parsedValue = new String(ch, start,length); 
+		}
+		
+		private void startAlters(Attributes atts) {
+			//Resets number of names per question counter.
+			numNames = 0;
+			alterPair = new String[2];
+		}
+		
+		private void startIndex(Attributes atts) {
+			String indexNameAttribute = atts.getValue("", index_name);
+			if(indexNameAttribute == null)
+				return;
+			numNames++;
+			switch(numNames) {
+				case 1:
+					alterPair[0] = indexNameAttribute;
+					break;
+				case 2:
+					alterPair[1] = indexNameAttribute;
+					break;
+				default:
+					//It should never arrive here. In egonet interviews all alter answers have 1 or 2 names.
+					return;
+			}
+		}
+		
+		private void endName() {
+			String alterName = parsedValue.toString().trim(); 
+			if(!hasAlter(alterName)) {
+				addToLifetimeOfAlter(interval, alterName);
+			}
+		}
+				
+		private void endAdjacent() {
+			areAdjacent = Boolean.valueOf(parsedValue.toString().trim()); 
+		}	
+		
+		private void endAlters() {
+			//Both alters are filled. Thas was an alter pair question.
+			if (alterPair[0] != null && alterPair[1] != null) {
+				if (areAdjacent) {
+					addToLifetimeOfTie(interval,alterPair[0], alterPair[1]);
+				}
+			}	
+		}
+	}
+	
 	private class ImportGraphMLHandler extends DefaultHandler {
 
 		//names of XML elements
