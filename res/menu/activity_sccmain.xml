@@ -20,16 +20,22 @@
         android:orderInCategory="21"
         android:showAsAction="ifRoom"
         android:title="@string/menu_network_view"/>
-    <item
-        android:id="@+id/menu_interview"
-        android:orderInCategory="29"
-        android:showAsAction="never"
-        android:title="@string/menu_interview"/>
+    <item 
+        android:id="@+id/menu_statistics_view"
+        android:orderInCategory="22"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_statistics_img"
+        android:title="@string/menu_statistics_view"/>
     <item
         android:id="@+id/menu_history"
         android:orderInCategory="30"
         android:showAsAction="never"
         android:title="@string/menu_history"/>
+    <item
+        android:id="@+id/menu_interview"
+        android:orderInCategory="31"
+        android:showAsAction="never"
+        android:title="@string/menu_interview"/>
     <item
         android:id="@+id/menu_export_history_graphml"
         android:orderInCategory="41"
@@ -45,12 +51,6 @@
         android:orderInCategory="43"
         android:showAsAction="never"
         android:title="@string/menu_import_int_file"/>
-    <item 
-        android:id="@+id/menu_statistics_view"
-        android:orderInCategory="50"
-        android:showAsAction="ifRoom"
-        android:icon="@drawable/ic_action_statistics_img"
-        android:title="@string/menu_statistics_view"/>
     <item
         android:id="@+id/menu_settings"
         android:orderInCategory="100"
