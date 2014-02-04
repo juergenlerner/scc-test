@@ -143,6 +143,7 @@ android.view.View.OnClickListener {
 	/*
 	 * String constants defining the statistics view to show.
 	 */
+	private static final String STATISTICS_CONTROL = "statistics_control";
 	private static final String STATISTICS_GENDER = "statistics_gender";
 	private static final String STATISTICS_DENSITY = "statistics_density";
 		
@@ -602,7 +603,7 @@ android.view.View.OnClickListener {
 			importEgonetInterview();
 			return true;
 		case R.id.menu_statistics_view:
-			switchToStatisticsView(STATISTICS_GENDER);
+			showStatisticsControl();
 			return true;
 		case R.id.menu_settings:
 			openSettings();
@@ -728,6 +729,8 @@ android.view.View.OnClickListener {
 			switchToAttributeView();
 		if(LAST_VIEW_LABEL_EGO.equals(topLevelViewLabel))
 			switchToEgoView();
+		if(LAST_VIEW_LABEL_STATISTICS.equals(viewLabel))
+			switchToStatisticsView(STATISTICS_CONTROL);
 	}
 	
 	/**
@@ -739,10 +742,8 @@ android.view.View.OnClickListener {
 		// Check that the activity is using the layout version with
 		// the list_container FrameLayout
 		if (findViewById(R.id.list_container) != null) {
-			
 			StatisticsControlFragment fragment = new StatisticsControlFragment();
-
-			// Replace the network fragment in the 'list_container' FrameLayout
+			// Replace the statistics control fragment in the 'list_container' FrameLayout
 			if(!fragment.isVisible())
 				trans.replace(R.id.list_container, fragment, STATISTICS_CONTROL_FRAGMENT_TAG);
 		}
@@ -752,16 +753,23 @@ android.view.View.OnClickListener {
 			//Check which statistics fragment must be showed in the right fragment.
 			if(statisticsFragment.equals(STATISTICS_GENDER)) {
 				StatisticsViewGenderFragment fragment = new StatisticsViewGenderFragment();
-				// Replace the network fragment in the 'view_container' FrameLayout
+				// Replace the statistics fragment in the 'view_container' FrameLayout
 				if(!fragment.isVisible())
 					trans.replace(R.id.detail_container, fragment, STATISTICS_VIEW_GENDER_FRAGMENT_TAG);
 			}
-			if(statisticsFragment.equals(STATISTICS_DENSITY)){
+			else if(statisticsFragment.equals(STATISTICS_DENSITY)){
 				StatisticsViewDensityFragment fragment = new StatisticsViewDensityFragment();
-				// Replace the network fragment in the 'view_container' FrameLayout
+				// Replace the statistics fragment in the 'view_container' FrameLayout
 				if(!fragment.isVisible())
 					trans.replace(R.id.detail_container, fragment, STATISTICS_VIEW_DENSITY_FRAGMENT_TAG);
-			}			
+			} else {
+				//If method was called with STATISTICS_CONTROL or something else (unknown statistics view),
+				//right panel will show gender chart.
+				StatisticsViewGenderFragment fragment = new StatisticsViewGenderFragment();
+				// Replace the statistics fragment in the 'view_container' FrameLayout
+				if(!fragment.isVisible())
+					trans.replace(R.id.detail_container, fragment, STATISTICS_VIEW_GENDER_FRAGMENT_TAG);
+			}
 		}
 		// Check that the activity is using the layout version with
 		// the single_pane_container
@@ -772,16 +780,22 @@ android.view.View.OnClickListener {
 					if(!fragment.isVisible())
 						trans.replace(R.id.single_pane_container, fragment, STATISTICS_VIEW_GENDER_FRAGMENT_TAG);
 				}
-				if (statisticsFragment.equals(STATISTICS_DENSITY)) {
+				else if (statisticsFragment.equals(STATISTICS_DENSITY)) {
 					Fragment fragment = new StatisticsViewDensityFragment();
 					if(!fragment.isVisible())
 						trans.replace(R.id.single_pane_container, fragment, STATISTICS_VIEW_DENSITY_FRAGMENT_TAG);
-
+				} 
+				else {
+					//If method was called with STATISTICS_CONTROL or something else (unknown statistic view),
+					//show statistics control fragment.
+					Fragment fragment = new StatisticsControlFragment();
+					if(!fragment.isVisible())
+						trans.replace(R.id.single_pane_container, fragment, STATISTICS_CONTROL_FRAGMENT_TAG);
 				}
 			} else {
 				Fragment fragment = new StatisticsControlFragment();
 				if(!fragment.isVisible())
-					trans.replace(R.id.single_pane_container, fragment, STATISTICS_CONTROL_FRAGMENT_TAG);				
+					trans.replace(R.id.single_pane_container, fragment, STATISTICS_CONTROL_FRAGMENT_TAG);
 			}
 		}
 		if(!trans.isEmpty()){
@@ -1142,7 +1156,7 @@ android.view.View.OnClickListener {
 		properties.setPropertyLastViewLabel(LAST_VIEW_LABEL_ATTRIBUTE);
 		properties.setPropertyLastTopLevelViewLabel(LAST_VIEW_LABEL_ATTRIBUTE);
 		setDisplayShowTopLevelView(dualPane);
-	}
+	}	
 
 	/**
 	 * Shows the ego details in the single pane.
@@ -1190,6 +1204,11 @@ android.view.View.OnClickListener {
 	public void showDensityStatisticsFromStatisticsControl(View view){
 		SCCProperties.getInstance(this).setPropertyShowDetailInSinglePaneView(true);
 		switchToStatisticsView(STATISTICS_DENSITY);
+	}
+	
+	public void showStatisticsControl() {
+		SCCProperties.getInstance(this).setPropertyShowDetailInSinglePaneView(false);
+		switchToStatisticsView(STATISTICS_CONTROL);
 	}
 
 	/**
