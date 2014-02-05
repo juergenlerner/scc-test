@@ -4614,6 +4614,8 @@ public class PersonalNetwork{
 		
 		@Override
 		public void characters(char[] ch, int start, int length) throws SAXException {
+			//TODO: could it happen that the parser calls characters several times for 'one chunk' of PCDATA?
+			//TODO: maybe it is saver to call StringBuffer.apend(ch, start, length)
 			parsedValue = new String(ch, start,length); 
 		}
 		

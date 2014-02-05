@@ -723,14 +723,19 @@ android.view.View.OnClickListener {
 		String topLevelViewLabel = properties.getPropertyLastTopLevelViewLabel();
 		if(viewLabel.equals(topLevelViewLabel))//we must be in single pane, detail view --> move to the master view
 			properties.setPropertyShowDetailInSinglePaneView(false);
-		if(LAST_VIEW_LABEL_ALTER.equals(topLevelViewLabel))
-			switchToAlterView();
-		if(LAST_VIEW_LABEL_ATTRIBUTE.equals(topLevelViewLabel))
-			switchToAttributeView();
-		if(LAST_VIEW_LABEL_EGO.equals(topLevelViewLabel))
-			switchToEgoView();
-		if(LAST_VIEW_LABEL_STATISTICS.equals(viewLabel))
-			switchToStatisticsView(STATISTICS_CONTROL);
+		if(LAST_VIEW_LABEL_STATISTICS.equals(viewLabel) &&  //statistics view and
+				findViewById(R.id.single_pane_container) != null && // single pane showing 
+				properties.getPropertyShowDetailInSinglePaneView()){ //the details view --> move to the statistics control view
+			properties.setPropertyShowDetailInSinglePaneView(false);
+			switchToStatisticsView(STATISTICS_CONTROL); //TODO: it should be possible to implement switchToStatisticsView without any parameter (storing that information in the properties)
+		} else { //in top-level views and all other second level views (besides statistics) and in two-pane view, we move to the last top level view
+			if(LAST_VIEW_LABEL_ALTER.equals(topLevelViewLabel))
+				switchToAlterView();
+			if(LAST_VIEW_LABEL_ATTRIBUTE.equals(topLevelViewLabel))
+				switchToAttributeView();
+			if(LAST_VIEW_LABEL_EGO.equals(topLevelViewLabel))
+				switchToEgoView();
+		}
 	}
 	
 	/**
