@@ -58,8 +58,8 @@ public class Statistics {
 	public void calculateAllStatisticsAt(long timePoint) {
 		calculateGraphDensityAt(timePoint);
 		calculateGenderPercentageAt(timePoint);
-		calculateWeakTiesPercentage();
-		calculateStrongTiesPercentage();
+		calculateWeakTiesPercentage(timePoint);
+		calculateStrongTiesPercentage(timePoint);
 	}
 	
 	public void calculateGenderPercentageAt(long timePoint) {
@@ -88,11 +88,11 @@ public class Statistics {
 		graphDensity = (2*numberOfEdges)/(numberOfVertices*(numberOfVertices-1));
 	}
 	
-	public void calculateWeakTiesPercentage() {
+	public void calculateWeakTiesPercentage(long timePoint) {
 		
 	}
 	
-	public void calculateStrongTiesPercentage() {
+	public void calculateStrongTiesPercentage(long timePoint) {
 		
 	}
 }

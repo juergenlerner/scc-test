@@ -94,8 +94,6 @@ public class SCCProperties {
 	 * (if true) or "randomized interview" (if false). 
 	 */
 	private static final String KEY_INTERVIEW_SETTINGS_EGONET = "key_interview_settings_egonet";	
-
-	
 	/*
 	 * Key to address the current layout settings - allowing to 
 	 * retrieve these after restart. 
@@ -105,7 +103,12 @@ public class SCCProperties {
 	 * Key to address the current layout settings. The top level view is only the ego, alter, or attribute view.
 	 */
 	private static final String KEY_LAST_TOP_LEVEL_VIEW_LABEL = "key_last_top_level_view_label";	
-
+	/*
+	 * Key to address the current layout settings - allowing to 
+	 * remember which statistic view was visited.
+	 */
+	private static final String KEY_LAST_STATISTIC_VIEW = "key_last_statistics_view";
+	
 	/*
 	 * Values for boolean properties.
 	 */
@@ -194,6 +197,20 @@ public class SCCProperties {
 	 */
 	public String getPropertyLastTopLevelViewLabel(){
 		return getStringProperty(KEY_LAST_TOP_LEVEL_VIEW_LABEL);
+	}
+	
+	/**
+	 * Sets the last statistic view visited by the user.
+	 */
+	public void setPropertyLastStatisticView(String statisticView){
+		setStringProperty(KEY_LAST_STATISTIC_VIEW, statisticView);
+	}
+	
+	/**
+	 * Returns the last statistic view visited.
+	 */
+	public String getPropertyLastStatisticsView() {
+		return getStringProperty(KEY_LAST_STATISTIC_VIEW);
 	}
 	
 	/**
@@ -562,6 +579,8 @@ public class SCCProperties {
 	        setInitialStringProperty(KEY_LAST_VIEW_LABEL, SCCMainActivity.LAST_VIEW_LABEL_ALTER, db);
 	        //initial view label
 	        setInitialStringProperty(KEY_LAST_TOP_LEVEL_VIEW_LABEL, SCCMainActivity.LAST_VIEW_LABEL_ALTER, db);
+	        //initial statistic view
+	        setInitialStringProperty(KEY_LAST_STATISTIC_VIEW, SCCMainActivity.STATISTICS_GENDER,db);
 	    }
 
 		@Override

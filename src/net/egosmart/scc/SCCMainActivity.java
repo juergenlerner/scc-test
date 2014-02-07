@@ -27,6 +27,7 @@ import net.egosmart.scc.gui.SearchViewFragment;
 import net.egosmart.scc.gui.StatisticsControlFragment;
 import net.egosmart.scc.gui.StatisticsViewDensityFragment;
 import net.egosmart.scc.gui.StatisticsViewGenderFragment;
+import net.egosmart.scc.gui.StatisticsViewIdealCaseFragment;
 import net.egosmart.scc.gui.SurveyControlFragment;
 import net.egosmart.scc.gui.SurveyFragment;
 import net.egosmart.scc.gui.dialog.AddAlterAlterContactEventDialog;
@@ -118,6 +119,14 @@ android.view.View.OnClickListener {
 	public static final String LAST_VIEW_LABEL_EGO = "ego";
 	public static final String LAST_VIEW_LABEL_ALTER = "alter";
 	public static final String LAST_VIEW_LABEL_ATTRIBUTE = "attribute";
+	
+	/*
+	 * String constants defining the statistics views.
+	 */
+	public static final String STATISTICS_CONTROL = "statistics_control";
+	public static final String STATISTICS_GENDER = "statistics_gender";
+	public static final String STATISTICS_DENSITY = "statistics_density";
+	public static final String STATISTICS_IDEAL_CASE = "statistics_ideal_case";
 
 	/*
 	 * String constants serving as identifying tags for the various fragments.
@@ -137,15 +146,9 @@ android.view.View.OnClickListener {
 	private static final String STATISTICS_CONTROL_FRAGMENT_TAG = "statistics_control_fragment_tag";
 	private static final String STATISTICS_VIEW_GENDER_FRAGMENT_TAG = "statistics_view_gender_fragment_tag";
 	private static final String STATISTICS_VIEW_DENSITY_FRAGMENT_TAG = "statistics_view_density_fragment_tag";
+	private static final String STATISTICS_VIEW_IDEAL_CASE_FRAGMENT_TAG = "statistics_view_ideal_case_fragment_tag";
 	private static final String SURVEY_CONTROL_FRAGMENT_TAG = "survey_control_fragment_tag";
 	private static final String SURVEY_FRAGMENT_TAG = "survey_fragment_tag";
-
-	/*
-	 * String constants defining the statistics view to show.
-	 */
-	private static final String STATISTICS_CONTROL = "statistics_control";
-	private static final String STATISTICS_GENDER = "statistics_gender";
-	private static final String STATISTICS_DENSITY = "statistics_density";
 		
 	/*
 	 * Integer constants defining the ordering of elements in the view selection spinner in the action bar.
@@ -603,7 +606,7 @@ android.view.View.OnClickListener {
 			importEgonetInterview();
 			return true;
 		case R.id.menu_statistics_view:
-			showStatisticsControl();
+			switchToStatisticsView();
 			return true;
 		case R.id.menu_settings:
 			openSettings();
@@ -727,7 +730,7 @@ android.view.View.OnClickListener {
 				findViewById(R.id.single_pane_container) != null && // single pane showing 
 				properties.getPropertyShowDetailInSinglePaneView()){ //the details view --> move to the statistics control view
 			properties.setPropertyShowDetailInSinglePaneView(false);
-			switchToStatisticsView(STATISTICS_CONTROL); //TODO: it should be possible to implement switchToStatisticsView without any parameter (storing that information in the properties)
+			switchToStatisticsView(); 
 		} else { //in top-level views and all other second level views (besides statistics) and in two-pane view, we move to the last top level view
 			if(LAST_VIEW_LABEL_ALTER.equals(topLevelViewLabel))
 				switchToAlterView();
@@ -741,9 +744,12 @@ android.view.View.OnClickListener {
 	/**
 	 * Shows the statistics view.
 	 */
-	private void switchToStatisticsView(String statisticsFragment) {
+	private void switchToStatisticsView() {
 
 		FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+		//Get the last statistics view visited. 
+		String statisticsFragment = SCCProperties.getInstance(this).getPropertyLastStatisticsView();
+		
 		// Check that the activity is using the layout version with
 		// the list_container FrameLayout
 		if (findViewById(R.id.list_container) != null) {
@@ -767,13 +773,15 @@ android.view.View.OnClickListener {
 				// Replace the statistics fragment in the 'view_container' FrameLayout
 				if(!fragment.isVisible())
 					trans.replace(R.id.detail_container, fragment, STATISTICS_VIEW_DENSITY_FRAGMENT_TAG);
-			} else {
-				//If method was called with STATISTICS_CONTROL or something else (unknown statistics view),
-				//right panel will show gender chart.
-				StatisticsViewGenderFragment fragment = new StatisticsViewGenderFragment();
+			}
+			else if(statisticsFragment.equals(STATISTICS_IDEAL_CASE)){
+				StatisticsViewIdealCaseFragment fragment = new StatisticsViewIdealCaseFragment();
 				// Replace the statistics fragment in the 'view_container' FrameLayout
 				if(!fragment.isVisible())
-					trans.replace(R.id.detail_container, fragment, STATISTICS_VIEW_GENDER_FRAGMENT_TAG);
+					trans.replace(R.id.detail_container, fragment, STATISTICS_VIEW_IDEAL_CASE_FRAGMENT_TAG);
+			}
+			else {
+				//Throw Exception. Unknown Statistic view.
 			}
 		}
 		// Check that the activity is using the layout version with
@@ -790,9 +798,12 @@ android.view.View.OnClickListener {
 					if(!fragment.isVisible())
 						trans.replace(R.id.single_pane_container, fragment, STATISTICS_VIEW_DENSITY_FRAGMENT_TAG);
 				} 
-				else {
-					//If method was called with STATISTICS_CONTROL or something else (unknown statistic view),
-					//show statistics control fragment.
+				else if (statisticsFragment.equals(STATISTICS_IDEAL_CASE)) {
+					Fragment fragment = new StatisticsViewIdealCaseFragment();
+					if(!fragment.isVisible())
+						trans.replace(R.id.single_pane_container, fragment, STATISTICS_VIEW_IDEAL_CASE_FRAGMENT_TAG);
+				}
+				else { //If last view visited is not any of previous, show statistic control view.
 					Fragment fragment = new StatisticsControlFragment();
 					if(!fragment.isVisible())
 						trans.replace(R.id.single_pane_container, fragment, STATISTICS_CONTROL_FRAGMENT_TAG);
@@ -1196,7 +1207,8 @@ android.view.View.OnClickListener {
 	 */
 	public void showGenderStatisticsFromStatisticsControl(View view){
 		SCCProperties.getInstance(this).setPropertyShowDetailInSinglePaneView(true);
-		switchToStatisticsView(STATISTICS_GENDER);
+		SCCProperties.getInstance(this).setPropertyLastStatisticView(STATISTICS_GENDER);
+		switchToStatisticsView();
 	}
 	
 	/**
@@ -1208,12 +1220,20 @@ android.view.View.OnClickListener {
 	 */
 	public void showDensityStatisticsFromStatisticsControl(View view){
 		SCCProperties.getInstance(this).setPropertyShowDetailInSinglePaneView(true);
-		switchToStatisticsView(STATISTICS_DENSITY);
+		SCCProperties.getInstance(this).setPropertyLastStatisticView(STATISTICS_DENSITY);
+		switchToStatisticsView();
 	}
-	
-	public void showStatisticsControl() {
-		SCCProperties.getInstance(this).setPropertyShowDetailInSinglePaneView(false);
-		switchToStatisticsView(STATISTICS_CONTROL);
+	/**
+	 * Shows panel to update the ideal case.
+	 * 
+	 * Called from set up ideal case button in the statistics control view.
+	 * 
+	 * @param view
+	 */
+	public void showIdealCaseFromStatisticsControl(View view) {
+		SCCProperties.getInstance(this).setPropertyShowDetailInSinglePaneView(true);
+		SCCProperties.getInstance(this).setPropertyLastStatisticView(STATISTICS_IDEAL_CASE);
+		switchToStatisticsView();
 	}
 
 	/**

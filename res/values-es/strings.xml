@@ -145,6 +145,9 @@
     <string name="statistics_control_show_gender">Estadísticas sobre género</string>
     <string name="statistics_control_show_density">Estadísticas sobre densidad</string>
     <string name="statistics_control_ideal_case_text">Definir caso ideal</string>
+    <string name="statistics_set_up_ideal_man_hint">Porcentaje masculino ideal</string>
+    <string name="statistics_set_up_ideal_woman_hint">Porcentaje femenino ideal</string>
+    <string name="statistics_set_up_button_text">Actualizar caso ideal</string>
     <string name="interview_headline_text">Pregunta siguiente:</string>
     <string name="interview_type_settings_headline_text">Typo de entrevista</string>
     <string name="interview_type_settings_radiobutton_text_random">Entrevista aleatoria</string>

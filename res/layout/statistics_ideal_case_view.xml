@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent" 
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              android:padding="5sp" >
+    <EditText 
+	    android:id="@+id/ideal_man_percentatge_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:hint="@string/statistics_set_up_ideal_man_hint"
+        android:textColor="#555555"
+        android:textSize="22sp"
+        />
+    <EditText 
+	    android:id="@+id/ideal_woman_percentatge_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:hint="@string/statistics_set_up_ideal_woman_hint"
+        android:textColor="#555555"
+        android:textSize="22sp"
+        />
+    <EditText 
+	    android:id="@+id/ideal_density_percentatge_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:hint="@string/statistics_set_up_ideal_man_hint"
+        android:textColor="#555555"
+        android:textSize="22sp"
+        />
+    <Button 
+        android:id="@+id/update_ideal_case_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/statistics_set_up_button_text"
+        android:onClick="showIdealCaseFromStatisticsControl"
+        />
+</LinearLayout>
