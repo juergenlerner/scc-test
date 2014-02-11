@@ -24,8 +24,14 @@ public class EgonetQuestionnaireFile extends DefaultHandler{
 	//name of the study (not important)
 	private String name;
 
-	//each study has a fixed number of alters for all collected networks
-	private int numalters;
+	//in new versions, number of alters can be undeterminated, or in a range between
+	//a minimum and maximum. Setting this min and max at same value means a fixed number of alters.
+	private int minalters;
+	private int maxalters;
+	
+	//if alterModeUnlimited is true, there is no maximum number of alters in the study. If false,
+	//will be a maximum number of alters. always must be a minimum.
+	private boolean altermodeunlimited;
 
 	//altersamplingmodel and altersamplingparameter are not read (what are they for?)
 
@@ -71,10 +77,6 @@ public class EgonetQuestionnaireFile extends DefaultHandler{
 		}
 	}
 
-	public int numberOfAlters(){
-		return numalters;
-	}
-
 	public String name(){
 		return name;
 	}
@@ -88,7 +90,19 @@ public class EgonetQuestionnaireFile extends DefaultHandler{
 	return alterQuestionOrder.size();
     }
 	 */
+	
+	public int maxNumberOfAlters(){
+		return maxalters;
+	}
 
+	public int minNumberOfAlters(){
+		return minalters;
+	}
+	
+	public boolean getUnlimitedMode(){
+		return altermodeunlimited;
+	}
+	
 	public LinkedHashMap<Long, Question> getQuestionsInOrder(){
 		LinkedHashMap<Long, Question> ret = getEgoQuestions();
 		ret.putAll(getNameGeneratorQuestions());
@@ -139,7 +153,9 @@ public class EgonetQuestionnaireFile extends DefaultHandler{
 
 	//names of XML elements
 	private static final String elem_name = "name";
-	private static final String elem_numalters = "numalters";
+	private static final String elem_altermodeunlimited = "altermodeunlimited";
+	private static final String elem_minalters = "minalters";
+	private static final String elem_maxalters = "maxalters";
 	private static final String elem_questionorder = "questionorder";
 	private static final String elem_id = "id";// <id> element within <questionorder>
 	private static final String elem_QuestionList = "QuestionList";
@@ -195,8 +211,12 @@ public class EgonetQuestionnaireFile extends DefaultHandler{
 		//at the end of the leaf elements, the current parsed character data has to be saved in some variables, 
 		if(localName.equals(elem_name))//name element occurs only once (is name of the study)
 			name = curr_pcd.toString();
-		if(localName.equals(elem_numalters))//numalters element occurs only once 
-			numalters = Integer.parseInt(curr_pcd.toString());
+		if(localName.equals(elem_altermodeunlimited))
+			altermodeunlimited = Boolean.parseBoolean(curr_pcd.toString());
+		if(localName.equals(elem_minalters))
+			minalters = Integer.parseInt(curr_pcd.toString());
+		if(localName.equals(elem_maxalters))
+			maxalters = Integer.parseInt(curr_pcd.toString());
 		if(localName.equals(elem_id))// <id> element within <questionorder>
 			questionOrderCurrentlyToFillWithIds.add(new Long(curr_pcd.toString()));
 		if(localName.equals(elem_Question))//finished parsing of <Question> element 

@@ -65,7 +65,9 @@ public class Questionnaire {
 					"PRIMARY KEY (" + PROPERTIES_COL_KEY + ")  );";
 	// these are the keys that identify the different properties
 	private static final String PROPERTIES_KEY_QUESTIONNAIRE_NAME = "questionnaire_name";
-	private static final String PROPERTIES_KEY_NUMALTERS_BY_DESIGN = "numalters_design";
+	private static final String PROPERTIES_KEY_MINALTERS = "minimum_alters";
+	private static final String PROPERTIES_KEY_MAXALTERS = "maximum_alters";
+	private static final String PROPERTIES_KEY_ALTERMODE = "alter_mode";
 	private static final String PROPERTIES_KEY_NUMALTERS_BY_RESPONSE = "numalters_response";
 	private static final String PROPERTIES_KEY_CURRENT_QUESTION_NUMBER = "current_question_number";
 	private static final String PROPERTIES_KEY_NUMQUESTIONS = "number_of_questions";
@@ -121,7 +123,9 @@ public class Questionnaire {
 	public void initFromFile(EgonetQuestionnaireFile qFile){
 		clearAllTables();
 		setProperty(PROPERTIES_KEY_QUESTIONNAIRE_NAME, qFile.name());
-		setProperty(PROPERTIES_KEY_NUMALTERS_BY_DESIGN, Integer.toString(qFile.numberOfAlters()));
+		setProperty(PROPERTIES_KEY_MAXALTERS, Integer.toString(qFile.maxNumberOfAlters()));
+		setProperty(PROPERTIES_KEY_MINALTERS, Integer.toString(qFile.minNumberOfAlters()));
+		setProperty(PROPERTIES_KEY_ALTERMODE, Boolean.toString(qFile.getUnlimitedMode()));
 		setProperty(PROPERTIES_KEY_NUMALTERS_BY_RESPONSE, Integer.toString(0));
 		PersonalNetwork network = PersonalNetwork.getInstance(activity);
 		LinkedHashMap<Long, Question> questions = qFile.getQuestionsInOrder();
@@ -567,7 +571,7 @@ public class Questionnaire {
 		return ret;
 	}
 
-	public int getNumberOfAltersByDesign(){
+	/*public int getNumberOfAltersByDesign(){
 		String selection = PROPERTIES_COL_KEY + " = ?";
 		String[] args = {PROPERTIES_KEY_NUMALTERS_BY_DESIGN};
 		Cursor c = db.query(PROPERTIES_TABLE_NAME, new String[]{PROPERTIES_COL_VALUE}, selection, 
@@ -581,7 +585,7 @@ public class Questionnaire {
 		int ret = Integer.parseInt(c.getString(c.getColumnIndexOrThrow(PROPERTIES_COL_VALUE)));
 		c.close();
 		return ret;
-	}
+	}*/
 
 	public int getNumberOfAltersByResponse(){
 		String selection = PROPERTIES_COL_KEY + " = ?";
