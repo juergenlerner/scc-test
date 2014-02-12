@@ -184,7 +184,6 @@ android.view.View.OnClickListener {
 	public static final String EDIT_ALTER_ALTER_TIES_DIALOG_TAG = "edit_alter_alter_ties_dialog_tag";
 	public static final String EDIT_EGO_ALTER_ATTRIBS_DIALOG_TAG = "edit_ego_alter_attribs_dialog_tag";
 	public static final String EDIT_ALTER_ALTER_ATTRIBS_DIALOG_TAG = "edit_alter_alter_attribs_dialog_tag";
-	public static final String CONFIRM_IMPORTED_INTERVIEW_DIALOG_TAG = "confirm_imported_interview_dialog_tag";
 	private static final String ADD_ATTRIBUTE_DIALOG_TAG = "add_attribute_dialog_tag";
 	private static final String ADD_ALTER_DIALOG_TAG = "add_alter_dialog_tag";
 	private static final String CHANGE_SETTINGS_DIALOG_TAG = "change_settings_dialog_tag";
