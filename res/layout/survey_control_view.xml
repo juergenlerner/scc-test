@@ -23,6 +23,13 @@
             android:layout_height="wrap_content"
             android:text="@string/goto_survey_button_text" 
             />
+    <Button android:id="@+id/load_interview_button"
+        	android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_import_int_file" 
+            android:visibility="invisible"
+            android:onClick="importEgonetInterview"
+            />
 
     
 </LinearLayout>

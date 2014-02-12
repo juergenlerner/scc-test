@@ -83,6 +83,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 /**
  * Main activity handling the top-level hierarchy of the user interface and several
@@ -183,6 +184,7 @@ android.view.View.OnClickListener {
 	public static final String EDIT_ALTER_ALTER_TIES_DIALOG_TAG = "edit_alter_alter_ties_dialog_tag";
 	public static final String EDIT_EGO_ALTER_ATTRIBS_DIALOG_TAG = "edit_ego_alter_attribs_dialog_tag";
 	public static final String EDIT_ALTER_ALTER_ATTRIBS_DIALOG_TAG = "edit_alter_alter_attribs_dialog_tag";
+	public static final String CONFIRM_IMPORTED_INTERVIEW_DIALOG_TAG = "confirm_imported_interview_dialog_tag";
 	private static final String ADD_ATTRIBUTE_DIALOG_TAG = "add_attribute_dialog_tag";
 	private static final String ADD_ALTER_DIALOG_TAG = "add_alter_dialog_tag";
 	private static final String CHANGE_SETTINGS_DIALOG_TAG = "change_settings_dialog_tag";
@@ -601,9 +603,6 @@ android.view.View.OnClickListener {
 			return true;
 		case R.id.menu_import_history_graphml:
 			importHistoryFromGraphML();
-			return true;
-		case R.id.menu_import_int_file:
-			importEgonetInterview();
 			return true;
 		case R.id.menu_statistics_view:
 			switchToStatisticsView();
@@ -1459,6 +1458,16 @@ android.view.View.OnClickListener {
 		}
 	}
 
+
+	/**
+	 * Opens the select output int file dialog.
+	 * @param view
+	 */
+	public void importEgonetInterview(View view) {
+		DialogFragment dialog = SelectInputIntFileDialog.getInstance(this);
+		dialog.show(getSupportFragmentManager(), SELECT_INPUT_INT_FILE_DIALOG_TAG);
+	}
+	
 	/**
 	 * Opens the ego input file selection dialog.
 	 * @param view
@@ -1476,7 +1485,12 @@ android.view.View.OnClickListener {
 		EgonetQuestionnaireFile questionnairefile = new EgonetQuestionnaireFile(egoFile);
 		Questionnaire questionnaire = Questionnaire.getInstance(this);
 		questionnaire.initFromFile(questionnairefile);
-
+		//Enable load interview button after loading the study associated.
+		Button button = (Button) findViewById(R.id.load_interview_button);
+		button.setVisibility(Button.VISIBLE);
+		
+		PersonalNetwork.getInstance(this).setStudyFile(questionnairefile);
+		
 		updatePersonalNetworkViews();
 	}
 
@@ -1590,14 +1604,6 @@ android.view.View.OnClickListener {
 		DialogFragment dialog = SelectInputGraphMLFileDialog.getInstance(this);
 		dialog.show(getSupportFragmentManager(), SELECT_INPUT_GRAPHML_FILE_DIALOG_TAG);
 	}
-
-	/*
-	 * Opens the select output int file dialog.
-	 */
-	private void importEgonetInterview() {
-		DialogFragment dialog = SelectInputIntFileDialog.getInstance(this);
-		dialog.show(getSupportFragmentManager(), SELECT_INPUT_INT_FILE_DIALOG_TAG);
-	}
 	
 	/**
 	 * Reads an interview from an int file.
@@ -1605,6 +1611,12 @@ android.view.View.OnClickListener {
 	 */
 	public void loadInterviewFromFile(File intFile){
 		PersonalNetwork.getInstance(this).importEgonetInterview(intFile);
+		Toast toast;
+		if(PersonalNetwork.getInstance(this).isInterviewLoaded())
+			toast = Toast.makeText(this, R.string.correctly_imported_interview_toast, Toast.LENGTH_SHORT);		
+		else
+			toast = Toast.makeText(this, R.string.error_imported_interview_toast, Toast.LENGTH_SHORT);		
+		toast.show();		
 	}
 	
 	/**

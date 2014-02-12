@@ -23,7 +23,9 @@ public class EgonetQuestionnaireFile extends DefaultHandler{
 
 	//name of the study (not important)
 	private String name;
-
+	//id of the study
+	private long id;
+	
 	//in new versions, number of alters can be undeterminated, or in a range between
 	//a minimum and maximum. Setting this min and max at same value means a fixed number of alters.
 	private int minalters;
@@ -91,6 +93,10 @@ public class EgonetQuestionnaireFile extends DefaultHandler{
     }
 	 */
 	
+	public long studyId() {
+		return id;
+	}
+	
 	public int maxNumberOfAlters(){
 		return maxalters;
 	}
@@ -152,6 +158,7 @@ public class EgonetQuestionnaireFile extends DefaultHandler{
 	///////////////////////////////////////////////
 
 	//names of XML elements
+	private static final String elem_package = "Package";
 	private static final String elem_name = "name";
 	private static final String elem_altermodeunlimited = "altermodeunlimited";
 	private static final String elem_minalters = "minalters";
@@ -169,6 +176,7 @@ public class EgonetQuestionnaireFile extends DefaultHandler{
 	private static final String elem_AnswerText = "AnswerText";
 
 	//names of XML attributs
+	private static final String attr_id = "Id";
 	private static final String attr_questiontype = "questiontype";//attribute of questionorder;
 	private static final String attr_index = "index";//attribute of AnswerText
 	private static final String attr_value = "value";//attribute of AnswerText
@@ -195,6 +203,8 @@ public class EgonetQuestionnaireFile extends DefaultHandler{
 
 	public void startElement(String uri, String localName, String qName, Attributes atts){
 		curr_pcd = new StringBuffer();//empties the current parsed character data
+		if(localName.equals(elem_package))
+			startPackage(atts);
 		if(localName.equals(elem_questionorder))
 			startQuestionOrderElement(atts);
 		if(localName.equals(elem_QuestionList))
@@ -267,6 +277,11 @@ public class EgonetQuestionnaireFile extends DefaultHandler{
 		curr_adjacent = Boolean.parseBoolean(atts.getValue(attr_adjacent));
 	}
 
+	private void startPackage(Attributes atts) {
+		String idStudy = atts.getValue("", attr_id);
+		id = Long.parseLong(idStudy);
+	}
+	
 	private void startQuestionOrderElement(Attributes atts){
 		int question_type = Integer.parseInt(atts.getValue(attr_questiontype));
 		if(question_type == Questionnaire.Q_ABOUT_EGO){

@@ -76,6 +76,8 @@
     <string name="confirm_remove_attribute_dialog_title">Confirm deletion of label</string>
     <string name="confirm_remove_attribute_message_part_1">Do you want to delete the label</string>
     <string name="confirm_remove_attribute_message_part_2">and all associated values?</string>
+    <string name="correctly_imported_interview_toast">Interview imported correctly</string>
+    <string name="error_imported_interview_toast">Error at importing interview!</string>
     <string name="create_new_alter_alter_label_title">Create new label among contacts</string>
     <string name="create_new_alter_label_title">Create new label for contacts</string>
     <string name="create_new_attribute_button_text">Create new attribute</string>

@@ -68,6 +68,7 @@ public class Questionnaire {
 	private static final String PROPERTIES_KEY_MINALTERS = "minimum_alters";
 	private static final String PROPERTIES_KEY_MAXALTERS = "maximum_alters";
 	private static final String PROPERTIES_KEY_ALTERMODE = "alter_mode";
+	private static final String PROPERTIES_KEY_STUDY_ID = "study_id";
 	private static final String PROPERTIES_KEY_NUMALTERS_BY_RESPONSE = "numalters_response";
 	private static final String PROPERTIES_KEY_CURRENT_QUESTION_NUMBER = "current_question_number";
 	private static final String PROPERTIES_KEY_NUMQUESTIONS = "number_of_questions";
@@ -122,6 +123,7 @@ public class Questionnaire {
 
 	public void initFromFile(EgonetQuestionnaireFile qFile){
 		clearAllTables();
+		setProperty(PROPERTIES_KEY_STUDY_ID, Long.toString(qFile.studyId()));
 		setProperty(PROPERTIES_KEY_QUESTIONNAIRE_NAME, qFile.name());
 		setProperty(PROPERTIES_KEY_MAXALTERS, Integer.toString(qFile.maxNumberOfAlters()));
 		setProperty(PROPERTIES_KEY_MINALTERS, Integer.toString(qFile.minNumberOfAlters()));
@@ -256,7 +258,7 @@ public class Questionnaire {
 	public boolean isAfterLastQuestion() {
 		return getCurrentQuestionNumber() >= getNumberOfQuestions();
 	}
-
+	
 	public Question getCurrentQuestion(){
 		String selection = QUESTIONS_COL_NUMBER + " = ?";
 		String[] args ={Integer.toString(getCurrentQuestionNumber())};

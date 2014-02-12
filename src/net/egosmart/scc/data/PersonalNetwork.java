@@ -28,6 +28,9 @@ import org.xmlpull.v1.XmlSerializer;
 
 import net.egosmart.scc.R;
 import net.egosmart.scc.SCCMainActivity;
+import net.egosmart.scc.collect.EgonetQuestionnaireFile;
+import net.egosmart.scc.collect.Question;
+import net.egosmart.scc.collect.Questionnaire;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -468,7 +471,13 @@ public class PersonalNetwork{
 
 	//Reference to the database.
 	private SQLiteDatabase db;
+	
+	//Reference to the study file loaded.
+	private EgonetQuestionnaireFile studyFile;
 
+	//the interview has loaded correctly?
+	private boolean interviewLoaded;
+	
 	/*
 	 * Gets a reference to the database (if necessary creates it). This may trigger a call
 	 * to onUpgrade which might take long.
@@ -4494,19 +4503,23 @@ public class PersonalNetwork{
 	}
 
 	/**
-	 * Reads the content of the int file to show statistics about it.
+	 * Reads the content of the int file and load its data into application.
 	 * 
 	 * @param file Int file with the Egonet interview.
+	 * @param study Ego file with the definition of the egonet study.
 	 */
 	public void importEgonetInterview(File file){
 		SAXParserFactory saxfactory = SAXParserFactory.newInstance();
 		SAXParser saxparser;
 		try {
+			interviewLoaded = false;
 			saxparser = saxfactory.newSAXParser();
-			DefaultHandler handler = new ImportIntHandler();
+			DefaultHandler handler = new ImportIntHandler(studyFile);
 			db.beginTransaction();
 			saxparser.parse(file, handler);
 			db.setTransactionSuccessful();
+			interviewLoaded = true;
+			
 		} catch (ParserConfigurationException e) {
 			Log.e("Import int", e.getMessage());
 			e.printStackTrace();
@@ -4550,52 +4563,45 @@ public class PersonalNetwork{
 		}
 
 	}
-
-	//Handler for importing egonet interviews to application. 
 	private class ImportIntHandler extends DefaultHandler {
-		
 		//names of XML elements
+		private static final String elem_interview = "Interview";
 		private static final String elem_name = "Name";
+		private static final String elem_question_id = "QuestionId";
+		private static final String elem_string = "String";
 		private static final String elem_index = "Index";
 		private static final String elem_adjacent = "Adjacent";
-		private static final String elem_time_stamp = "TimeStamp";
 		private static final String elem_alters = "Alters";
-		private static final String elem_complete = "Complete";
 		
 		//names of XML attributes		
 		//attributes of Index
 		private static final String index_name = "name";
+		//attributes of Interview
+		private static final String interview_study_id = "StudyId";
 		
-		//counter to know how many alters are in a concrete answer (1 or 2).
-		int numNames;		
 		String parsedValue;
-		boolean areAdjacent;
-		TimeInterval interval;
-		
-		//Vector containing parsed alter names.
+		String alterResponse; //we can't add a reponse of an alter question until we know alter name. 
 		String[] alterPair;
-		private DateFormat formatter;
+		boolean areAdjacent;
+		TimeInterval interval;		
 		
+		Question currentQuestion;
+		EgonetQuestionnaireFile study;
 		
-		ImportIntHandler(){
+		ImportIntHandler(EgonetQuestionnaireFile egoFile) {
+			study = egoFile;
 		}
 
 		@Override
 		public void startDocument() throws SAXException {
-			numNames = 0;
-			//formatter = new SimpleDateFormat("dd-MM-yyyy");
-			alterPair = new String[2];
 			areAdjacent = false;
 			interval = TimeInterval.getRightUnbounded(System.currentTimeMillis());
 		}
-		
-		@Override
-		public void endDocument() {
-			//TODO:
-		}
-		
+				
 		@Override
 		public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException{
+			if(elem_interview.equals(localName))
+				startInterview(atts);
 			if(elem_alters.equals(localName))
 				startAlters(atts);
 			if(elem_index.equals(localName))
@@ -4606,6 +4612,10 @@ public class PersonalNetwork{
 		public void endElement(String uri, String localName, String qName) throws SAXException {
 			if(elem_name.equals(localName))
 				endName();
+			if(elem_question_id.equals(localName))
+				endQuestionId();
+			if(elem_string.equals(localName))
+				endString();
 			if(elem_alters.equals(localName))
 				endAlters();
 			if(elem_adjacent.equals(localName))
@@ -4619,9 +4629,15 @@ public class PersonalNetwork{
 			parsedValue = new String(ch, start,length); 
 		}
 		
+		private void startInterview (Attributes atts) throws SAXException {
+			//Check if current study matches with the study of interview. 
+			long studyIdFromInterview = Long.valueOf(atts.getValue("", interview_study_id));
+			if(studyIdFromInterview != study.studyId())
+				throw new SAXException("The study loaded and the study of the interview does not match");
+				
+		}
+		
 		private void startAlters(Attributes atts) {
-			//Resets number of names per question counter.
-			numNames = 0;
 			alterPair = new String[2];
 		}
 		
@@ -4629,18 +4645,26 @@ public class PersonalNetwork{
 			String indexNameAttribute = atts.getValue("", index_name);
 			if(indexNameAttribute == null)
 				return;
-			numNames++;
-			switch(numNames) {
-				case 1:
-					alterPair[0] = indexNameAttribute;
-					break;
-				case 2:
-					alterPair[1] = indexNameAttribute;
-					break;
-				default:
-					//It should never arrive here. In egonet interviews all alter answers have 1 or 2 names.
-					return;
-			}
+			if(alterPair[0] == null)
+				alterPair[0] = indexNameAttribute;
+			else if(alterPair[1] == null)
+				alterPair[1] = indexNameAttribute;
+			else 
+				return;
+		}
+		
+		private void endQuestionId() {
+			long questionId = Long.valueOf(parsedValue.toString().trim());
+			currentQuestion = study.getQuestion(questionId);
+		}
+		
+		private void endString() {
+			String value = parsedValue.toString().trim();
+			if(currentQuestion.type() == Questionnaire.Q_ABOUT_EGO)
+				setAttributeValueAt(TimeInterval.getRightUnboundedFromNow(),
+						currentQuestion.title(), Ego.getInstance(), value);
+			if(currentQuestion.type() == Questionnaire.Q_ABOUT_ALTERS)
+				alterResponse = value;
 		}
 		
 		private void endName() {
@@ -4655,15 +4679,20 @@ public class PersonalNetwork{
 		}	
 		
 		private void endAlters() {
-			//Both alters are filled. Thas was an alter pair question.
-			if (alterPair[0] != null && alterPair[1] != null) {
-				if (areAdjacent) {
+			//Now we know alter names. We can store them answers.
+			if (currentQuestion.type() == Questionnaire.Q_ABOUT_ALTERS)
+				setAttributeValueAt(TimeInterval.getRightUnboundedFromNow(),
+						currentQuestion.title(), Alter.getInstance(alterPair[0]), alterResponse);
+			if (currentQuestion.type() == Questionnaire.Q_ALTER_ALTER_TIES) {
+				if (areAdjacent)
 					addToLifetimeOfTie(interval,alterPair[0], alterPair[1]);
-				}
+				//Add dyad value.
+				setAttributeValueAt(TimeInterval.getRightUnboundedFromNow(), 
+						currentQuestion.title(), AlterAlterDyad.getInstance(alterPair[0], alterPair[1]),
+						alterResponse);
 			}	
 		}
 	}
-	
 	private class ImportGraphMLHandler extends DefaultHandler {
 
 		//names of XML elements
@@ -6306,5 +6335,20 @@ public class PersonalNetwork{
 		}
 		return true;
 	}
-
+	
+	/**
+	 * Sets the current loaded study file. It's used in loading interviews associated with this study.
+	 * @param study
+	 */
+	public void setStudyFile(EgonetQuestionnaireFile study) {
+		this.studyFile = study;
+	}
+	
+	/**
+	 * Egonet interview has been loaded correctly?
+	 * @return
+	 */
+	public boolean isInterviewLoaded() {
+		return interviewLoaded;
+	}
 }

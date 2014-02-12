@@ -75,6 +75,8 @@
     <string name="confirm_remove_attribute_dialog_title">Confirmar borrado de etiqueta</string>
     <string name="confirm_remove_attribute_message_part_1">Quieres borrar la etiqueta</string>
     <string name="confirm_remove_attribute_message_part_2">y todos los valores asociados?</string>
+	<string name="correctly_imported_interview_toast">Entrevista importada correctamente</string>
+	<string name="error_imported_interview_toast">Error al importar la entrevista!</string>	
     <string name="create_new_alter_alter_label_title">Crear nueva etiqueta entre contactos</string>
     <string name="create_new_alter_label_title">Crear nueva etiqueta para contactos</string>
     <string name="create_new_attribute_button_text">Crear atributo nuevo</string>
