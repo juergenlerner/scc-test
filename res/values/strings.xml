@@ -29,8 +29,8 @@
     <string name="alter_attribute_city_description">City where this contact (mainly) lives.</string>
     <string name="alter_attribute_gender_name">Gender</string>
     <string name="alter_attribute_gender_description">Gender of this contact. </string>
-    <string name="alter_attribute_gender_woman">woman</string>
-    <string name="alter_attribute_gender_man">man</string>
+    <string name="alter_attribute_gender_male">male</string>
+    <string name="alter_attribute_gender_female">female</string>
     <string name="alter_attribute_occupation_name">Occupation</string>
     <string name="alter_attribute_occupation_description">Main occupation of this contact. </string>
     <string name="alter_attribute_would_help_actively_name">Active support</string>

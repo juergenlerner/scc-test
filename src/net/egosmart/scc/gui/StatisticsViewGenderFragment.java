@@ -97,9 +97,9 @@ public class StatisticsViewGenderFragment extends Fragment {
 	        String labelString;
 	        
 	        if(parsedInt == 0)
-	        	labelString = activity.getString(R.string.alter_attribute_gender_man);
+	        	labelString = activity.getString(R.string.alter_attribute_gender_male);
 	        else if(parsedInt == 2)
-	        	labelString = activity.getString(R.string.alter_attribute_gender_woman);
+	        	labelString = activity.getString(R.string.alter_attribute_gender_female);
 	        else
 	        	labelString = "";
 

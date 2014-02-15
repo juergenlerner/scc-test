@@ -29,7 +29,11 @@ public class Statistics {
 		this.network = network;
 		this.activity = activity;
 		
-		//Default values at first use of app.
+		graphDensity = 0;
+		manPercentage = 0;
+		womanPercentage = 0;
+		
+		//Default values of ideal case at first use of app.
 		idealManPercentage = (float) 0.50;
 		idealWomanPercentage = (float) 0.50;
 		idealGraphDensity = (float) 0.50;		
@@ -84,13 +88,16 @@ public class Statistics {
 		Iterator<String> it = genderValues.values().iterator();
 		while(it.hasNext()) {
 			String gender = it.next();
-			if(gender.equals(activity.getString(R.string.alter_attribute_gender_man)))
+			if(gender.equals(activity.getString(R.string.alter_attribute_gender_male)))
 				altersMasculine++;
-			if(gender.equals(activity.getString(R.string.alter_attribute_gender_woman)))
+			if(gender.equals(activity.getString(R.string.alter_attribute_gender_female)))
 				altersFeminine++;			
 		}
-		manPercentage = altersMasculine/(altersMasculine+altersFeminine);
-		womanPercentage = altersFeminine/(altersMasculine+altersFeminine);
+		//Just checking is not 0/0 (NaN).
+		if(altersMasculine > 0 || altersFeminine > 0 ) {
+			manPercentage = altersMasculine/(altersMasculine+altersFeminine);
+			womanPercentage = altersFeminine/(altersMasculine+altersFeminine);
+		}
 	}
 	
 	public void calculateGraphDensityAt(long timePoint) {
