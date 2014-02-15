@@ -151,6 +151,8 @@
     <string name="statistics_set_up_ideal_man_hint">Ideal man percentatge</string>
     <string name="statistics_set_up_ideal_woman_hint">Ideal woman percentatge</string>
     <string name="statistics_set_up_button_text">Update ideal case</string>
+    <string name="statistics_success_case_text">Success case</string>
+    <string name="statistics_ideal_case_text">Ideal case</string>
     <string name="interview_headline_text">Next question:</string>
     <string name="interview_type_settings_headline_text">Interview type</string>
     <string name="interview_type_settings_radiobutton_text_random">Randomized interview</string>

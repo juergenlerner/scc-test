@@ -6,12 +6,9 @@
     android:layout_height="fill_parent">
     
      <com.androidplot.xy.XYPlot
-            android:id="@+id/mySimpleXYPlot"
+            android:id="@+id/plotView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            androidPlot.title="A Simple XY Plot"
-            androidPlot.domainLabel="Domain"
-            androidPlot.rangeLabel="Range"
             androidPlot.titleWidget.labelPaint.textSize="@dimen/title_font_size"
             androidPlot.domainLabelWidget.labelPaint.textSize="@dimen/domain_label_font_size"
             androidPlot.rangeLabelWidget.labelPaint.textSize="@dimen/range_label_font_size"

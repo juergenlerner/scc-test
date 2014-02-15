@@ -17,7 +17,7 @@ public class Statistics {
 	private float weakTiesPercentage;
 	private float strongTiesPercentage;
 	private float graphDensity;
-	
+			
 	//TODO: save the ideal values to database.
 	private float idealManPercentage;
 	private float idealWomanPercentage;
@@ -29,10 +29,22 @@ public class Statistics {
 		this.network = network;
 		this.activity = activity;
 		
-		//Provisional default values.
+		//Default values at first use of app.
 		idealManPercentage = (float) 0.50;
 		idealWomanPercentage = (float) 0.50;
-		idealGraphDensity = (float) 0.50;
+		idealGraphDensity = (float) 0.50;		
+	}
+	
+	public float getIdealManPercentage() {
+		return idealManPercentage;
+	}
+	
+	public float getIdealWomanPercentage() {
+		return idealWomanPercentage;
+	}
+	
+	public float getIdealGraphDensity() {
+		return idealGraphDensity;
 	}
 	
 	public float getManPercentage() {
