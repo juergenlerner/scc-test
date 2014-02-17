@@ -3,13 +3,33 @@
               android:layout_width="fill_parent" 
               android:layout_height="fill_parent"
               android:orientation="vertical"
+              android:verticalSpacing="0px" 
               android:padding="5sp" >
+    <TextView 
+        android:id="@+id/ideal_man_percentatge_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:text="@string/statistics_set_up_ideal_man_hint"
+        android:textColor="#555555"
+        android:textSize="22sp"
+        />
     <EditText 
 	    android:id="@+id/ideal_man_percentatge_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10sp"
+        android:layout_marginTop = "-20sp"
         android:hint="@string/statistics_set_up_ideal_man_hint"
+        android:textColor="#555555"
+        android:textSize="22sp"
+        />
+    <TextView 
+        android:id="@+id/ideal_woman_percentatge_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:text="@string/statistics_set_up_ideal_woman_hint"
         android:textColor="#555555"
         android:textSize="22sp"
         />
@@ -18,7 +38,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10sp"
+        android:layout_marginTop = "-20sp"
         android:hint="@string/statistics_set_up_ideal_woman_hint"
+        android:textColor="#555555"
+        android:textSize="22sp"
+        />
+    <TextView 
+        android:id="@+id/ideal_density_percentatge_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:text="@string/statistics_set_up_ideal_density_hint"
         android:textColor="#555555"
         android:textSize="22sp"
         />
@@ -27,6 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10sp"
+        android:layout_marginTop = "-20sp"
         android:hint="@string/statistics_set_up_ideal_man_hint"
         android:textColor="#555555"
         android:textSize="22sp"
@@ -36,6 +67,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/statistics_set_up_button_text"
-        android:onClick="showIdealCaseFromStatisticsControl"
         />
 </LinearLayout>

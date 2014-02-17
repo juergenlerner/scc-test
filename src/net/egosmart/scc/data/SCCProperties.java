@@ -108,6 +108,18 @@ public class SCCProperties {
 	 * remember which statistic view was visited.
 	 */
 	private static final String KEY_LAST_STATISTIC_VIEW = "key_last_statistics_view";
+	/*
+	 * Key to address the ideal percentage value for male statistics.
+	 */
+	private static final String KEY_STATISTIC_IDEAL_MALE = "key_statistic_ideal_male";
+	/*
+	 * Key to address the ideal percentage value for female statistics.
+	 */
+	private static final String KEY_STATISTIC_IDEAL_FEMALE ="key_statistic_ideal_female";
+	/*
+	 * Key to address the ideal graph density statistic.
+	 */
+	private static final String KEY_STATISTIC_IDEAL_GRAPH_DENSITY = "key_statistic_ideal_graph_density";
 	
 	/*
 	 * Values for boolean properties.
@@ -115,6 +127,17 @@ public class SCCProperties {
 	private static final String VALUE_TRUE = "true";
 	private static final String VALUE_FALSE = "false";
 	
+	/*
+	 * Table holding statistics ideal values.
+	 */
+	private static final String STATISTICS_PROPERTIES_TABLE_NAME = "statistics_properties";
+	private static final String STATISTICS_PROPERTIES_COL_KEY = "statistics_properties_key";
+	private static final String STATISTICS_PROPERTIES_COL_VALUE="statistics_properties_value";
+	private static final String STATISTICS_PROPERTIES_TABLE_CREATE_CMD = 
+			"CREATE TABLE " + STATISTICS_PROPERTIES_TABLE_NAME + " (" +
+			STATISTICS_PROPERTIES_COL_KEY + " TEXT, " +
+			STATISTICS_PROPERTIES_COL_VALUE + " TEXT NOT NULL, " +
+			"PRIMARY KEY (" + STATISTICS_PROPERTIES_COL_KEY + ") );";
 	/*
 	 * Table holding changeable properties of the app
 	 */
@@ -456,6 +479,93 @@ public class SCCProperties {
 		return getBooleanProperty(KEY_ALTER_DETAIL_SHOW_ALL_NEIGHBORS);
 	}
 	
+	/**
+	 * Sets the ideal value to male percentage in gender statistics
+	 * 
+	 * @param value
+	 */
+	public void setIdealValueMaleStatistics (float value) {
+		setFloatStatisticProperty(KEY_STATISTIC_IDEAL_MALE, value);
+	}
+	
+	/**
+	 * Returns the current ideal male percentage in database.
+	 * 
+	 */
+	public float getIdealValueMaleStatistics() {
+		return getFloatStatisticProperty(KEY_STATISTIC_IDEAL_MALE);
+	}
+	
+	/**
+	 * Sets the ideal value to female percentage in gender statistics
+	 * 
+	 * @param value
+	 */
+	public void setIdealValueFemaleStatistics (float value) {
+		setFloatStatisticProperty(KEY_STATISTIC_IDEAL_FEMALE, value);
+	}
+	
+	/**
+	 * Returns the current ideal female percentage in database.
+	 * 
+	 */
+	public float getIdealValueFemaleStatistics() {
+		return getFloatStatisticProperty(KEY_STATISTIC_IDEAL_FEMALE);
+	}
+	
+	/**
+	 * Sets the ideal value to graph density percentage in density statistics
+	 * 
+	 * @param value
+	 */
+	public void setIdealValueDensityStatistics (float value) {
+		setFloatStatisticProperty(KEY_STATISTIC_IDEAL_GRAPH_DENSITY, value);
+	}
+	
+	/**
+	 * Returns the current ideal graph density in database.
+	 * 
+	 */
+	public float getIdealValueDensityStatistics() {
+		return getFloatStatisticProperty(KEY_STATISTIC_IDEAL_GRAPH_DENSITY);
+	}
+	
+	/*
+	 * Sets the given float property to the given label in statistic properties
+	 */
+	private void setFloatStatisticProperty(String propertyKey, float value){
+        ContentValues values = new ContentValues();
+        values.put(STATISTICS_PROPERTIES_COL_KEY, propertyKey);
+        values.put(STATISTICS_PROPERTIES_COL_VALUE, Float.toString(value));
+        String where = STATISTICS_PROPERTIES_COL_KEY + " = ?";
+        String[] whereArgs = {propertyKey};
+        Cursor c = database.query(STATISTICS_PROPERTIES_TABLE_NAME, new String[]{STATISTICS_PROPERTIES_COL_VALUE}, 
+        		where, whereArgs, null, null, null);
+		if(c.moveToFirst()) //value is already set --> update
+			database.update(STATISTICS_PROPERTIES_TABLE_NAME, values, where, whereArgs);
+		else
+			database.insert(STATISTICS_PROPERTIES_TABLE_NAME, null, values);
+		c.close();
+	}
+	
+	/*
+	 * Returns the value of the given float property in statistics properties.
+	 */
+	private float getFloatStatisticProperty(String propertyKey){
+        String where = STATISTICS_PROPERTIES_COL_KEY + " = ?";
+        String[] whereArgs = {propertyKey};
+        Cursor c = database.query(STATISTICS_PROPERTIES_TABLE_NAME, new String[]{STATISTICS_PROPERTIES_COL_VALUE}, 
+        		where, whereArgs, null, null, null);
+		if(!c.moveToFirst()){
+			c.close();
+			//TODO: That makes sense?
+			return (Float) null;
+		}
+		float ret = c.getFloat(c.getColumnIndexOrThrow(STATISTICS_PROPERTIES_COL_VALUE));
+		c.close();
+		return ret;
+	}
+	
 	/*
 	 * Sets the given string property to the given label.
 	 */
@@ -542,6 +652,7 @@ public class SCCProperties {
 	    public void onCreate(SQLiteDatabase db) {
 	    	//create tables
 	        db.execSQL(PROPERTIES_TABLE_CREATE_CMD);
+	        db.execSQL(STATISTICS_PROPERTIES_TABLE_CREATE_CMD);
 	        //SET INITIAL VALUES
 	        //ego attributes in attribute list view
 	        setInitialBooleanProperty(KEY_ATTRIBUTE_LIST_EXPAND_EGO_ATTRIBUTES, true, db);
@@ -581,6 +692,14 @@ public class SCCProperties {
 	        setInitialStringProperty(KEY_LAST_TOP_LEVEL_VIEW_LABEL, SCCMainActivity.LAST_VIEW_LABEL_ALTER, db);
 	        //initial statistic view
 	        setInitialStringProperty(KEY_LAST_STATISTIC_VIEW, SCCMainActivity.STATISTICS_GENDER,db);
+	        //INITIAL VALUES FOR STATISTICS PROPERTIES
+	        //initial ideal male percentage
+	        //TODO: put the default values in a better place (R.strings maybe?)  
+	        setInitialStatisticProperty(KEY_STATISTIC_IDEAL_MALE, "0.5" ,db);
+	        //initial ideal female percentage
+	        setInitialStatisticProperty(KEY_STATISTIC_IDEAL_FEMALE, "0.5", db);
+	        //initial ideal graph density
+	        setInitialStatisticProperty(KEY_STATISTIC_IDEAL_GRAPH_DENSITY, "0.5", db);
 	    }
 
 		@Override
@@ -603,6 +722,13 @@ public class SCCProperties {
 	        values.put(PROPERTIES_COL_KEY, key);
 	        values.put(PROPERTIES_COL_VALUE, value);
 	        db.insert(PROPERTIES_TABLE_NAME, null, values);		
+		}
+		
+		private void setInitialStatisticProperty(String key, String value, SQLiteDatabase db) {
+			ContentValues values = new ContentValues();
+			values.put(STATISTICS_PROPERTIES_COL_KEY,  key);
+			values.put(STATISTICS_PROPERTIES_COL_VALUE, value);
+			db.insert(STATISTICS_PROPERTIES_TABLE_NAME, null, values);
 		}
 		
 	}

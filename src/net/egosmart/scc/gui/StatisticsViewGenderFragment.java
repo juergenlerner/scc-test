@@ -59,8 +59,8 @@ public class StatisticsViewGenderFragment extends Fragment {
 		formatter1 = new BarFormatter(Color.argb(200, 100, 150, 100), Color.LTGRAY);
 		formatter2 = new BarFormatter(Color.argb(200, 100, 100, 150), Color.LTGRAY);
 		
-		Number[] successCaseArray = {stats.getManPercentage(),null ,stats.getWomanPercentage()};
-		Number[] idealCaseArray = {stats.getIdealManPercentage(),null ,stats.getIdealGraphDensity()};
+		Number[] successCaseArray = {stats.getMalePercentage(),null ,stats.getFemalePercentage()};
+		Number[] idealCaseArray = {stats.getIdealMalePercentage(),null ,stats.getIdealFemalePercentage()};
 		
 		plot = (XYPlot) activity.findViewById(R.id.plotView);
 		
@@ -80,6 +80,7 @@ public class StatisticsViewGenderFragment extends Fragment {
 		
 		plot.getGraphWidget().setDomainValueFormat(new GenderFormatter());
 		plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
+		plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 0.1);
         plot.setRangeLowerBoundary(0, BoundaryMode.FIXED);
 	    plot.setDomainLowerBoundary(-1, BoundaryMode.FIXED);
 	    plot.setDomainUpperBoundary(3, BoundaryMode.FIXED);

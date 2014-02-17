@@ -78,6 +78,7 @@ public class StatisticsViewDensityFragment extends Fragment {
 		plot.getGraphWidget().getDomainOriginLabelPaint().setColor(Color.TRANSPARENT);
 		
 		plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
+		plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 0.1);
         plot.setRangeLowerBoundary(0, BoundaryMode.FIXED);
 	    plot.setDomainLowerBoundary(-1, BoundaryMode.FIXED);
 	    plot.setDomainUpperBoundary(1, BoundaryMode.FIXED);

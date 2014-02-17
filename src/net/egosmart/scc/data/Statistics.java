@@ -7,43 +7,38 @@ import net.egosmart.scc.R;
 import net.egosmart.scc.SCCMainActivity;
 
 public class Statistics {
-	
+	//References 
 	private PersonalNetwork network;
 	private SCCMainActivity activity;
-	
 	//Statistics
 	private float manPercentage;
 	private float womanPercentage;
 	private float weakTiesPercentage;
 	private float strongTiesPercentage;
 	private float graphDensity;
-			
-	//TODO: save the ideal values to database.
+	//Values for the ideal case.		
 	private float idealManPercentage;
 	private float idealWomanPercentage;
 	private float idealGraphDensity;
-	private float idealStrongTiesPercentage;
-	private float idealWeakTiesPercentage;
 	
 	public Statistics(PersonalNetwork network, SCCMainActivity activity) {
 		this.network = network;
 		this.activity = activity;
-		
+		//Default values
 		graphDensity = 0;
 		manPercentage = 0;
 		womanPercentage = 0;
-		
-		//Default values of ideal case at first use of app.
-		idealManPercentage = (float) 0.50;
-		idealWomanPercentage = (float) 0.50;
-		idealGraphDensity = (float) 0.50;		
+		//Get ideal case from SCCProperties.
+		idealManPercentage = SCCProperties.getInstance(activity).getIdealValueMaleStatistics();
+		idealWomanPercentage = SCCProperties.getInstance(activity).getIdealValueFemaleStatistics();
+		idealGraphDensity = SCCProperties.getInstance(activity).getIdealValueDensityStatistics();		
 	}
 	
-	public float getIdealManPercentage() {
+	public float getIdealMalePercentage() {
 		return idealManPercentage;
 	}
 	
-	public float getIdealWomanPercentage() {
+	public float getIdealFemalePercentage() {
 		return idealWomanPercentage;
 	}
 	
@@ -51,11 +46,23 @@ public class Statistics {
 		return idealGraphDensity;
 	}
 	
-	public float getManPercentage() {
+	public void setIdealGraphDensity(float value) {
+		SCCProperties.getInstance(activity).setIdealValueDensityStatistics(value);
+	}
+	
+	public void setIdealFemalePercentage(float value) {
+		SCCProperties.getInstance(activity).setIdealValueFemaleStatistics(value);
+	}
+	
+	public void setIdealMalePercentage(float value) {
+		SCCProperties.getInstance(activity).setIdealValueMaleStatistics(value);
+	}
+	
+	public float getMalePercentage() {
 		return manPercentage;
 	}
 	
-	public float getWomanPercentage() {
+	public float getFemalePercentage() {
 		return womanPercentage;
 	}
 	
@@ -70,7 +77,7 @@ public class Statistics {
 	public float getGraphDensity() {
 		return graphDensity;
 	}
-	
+
 	public void calculateAllStatisticsAt(long timePoint) {
 		calculateGraphDensityAt(timePoint);
 		calculateGenderPercentageAt(timePoint);
@@ -104,7 +111,8 @@ public class Statistics {
 		TimeInterval interval = new TimeInterval(timePoint, timePoint);
 		float numberOfEdges = network.getNumberOfUndirectedTiesAt(interval);
 		float numberOfVertices = network.getAltersAt(interval).size();
-		graphDensity = (2*numberOfEdges)/(numberOfVertices*(numberOfVertices-1));
+		if(numberOfVertices > 0)
+			graphDensity = (2*numberOfEdges)/(numberOfVertices*(numberOfVertices-1));
 	}
 	
 	public void calculateWeakTiesPercentage(long timePoint) {
