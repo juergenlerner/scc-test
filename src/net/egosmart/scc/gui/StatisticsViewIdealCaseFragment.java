@@ -1,7 +1,5 @@
 package net.egosmart.scc.gui;
 
-import java.util.Arrays;
-
 import net.egosmart.scc.SCCMainActivity;
 import net.egosmart.scc.R;
 import net.egosmart.scc.data.PersonalNetwork;
