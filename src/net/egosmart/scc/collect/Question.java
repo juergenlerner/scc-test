@@ -27,16 +27,16 @@ public class Question {
 	}
 
 	public void setType(int type){
-		if(type !=  Questionnaire.Q_ABOUT_EGO && type !=  Questionnaire.Q_NAME_GENERATOR && type !=  Questionnaire.Q_ABOUT_ALTERS && type !=  Questionnaire.Q_ALTER_ALTER_TIES)
+		if(type !=  InterviewManager.Q_ABOUT_EGO && type !=  InterviewManager.Q_NAME_GENERATOR && type !=  InterviewManager.Q_ABOUT_ALTERS && type !=  InterviewManager.Q_ALTER_ALTER_TIES)
 			throw new IllegalArgumentException("unknown question type: " + type);
 		this.type = type;
 	}
 
 	public void setAnswerType(int answerType){
-		if(answerType !=  Questionnaire.ANSWER_TYPE_CHOICE && answerType !=  Questionnaire.ANSWER_TYPE_NUMBER && answerType !=  Questionnaire.ANSWER_TYPE_TEXT)
+		if(answerType !=  InterviewManager.ANSWER_TYPE_CHOICE && answerType !=  InterviewManager.ANSWER_TYPE_NUMBER && answerType !=  InterviewManager.ANSWER_TYPE_TEXT)
 			throw new IllegalArgumentException("unknown answer type: " + answerType);
 		this.answerType = answerType;
-		if(this.answerType == Questionnaire.ANSWER_TYPE_CHOICE)
+		if(this.answerType == InterviewManager.ANSWER_TYPE_CHOICE)
 			choices = new HashMap<Integer,AnswerChoice>();
 	}
 
@@ -51,7 +51,7 @@ public class Question {
 	//for each <AnswerText> element (subelements of <Answers>)
 	//only allowed if answer typ is Study.ANSWER_TYPE_CHOICE
 	public void addAnswerChoice(int index, int value, boolean adjacent, String textValue){
-		if(this.answerType != Questionnaire.ANSWER_TYPE_CHOICE)
+		if(this.answerType != InterviewManager.ANSWER_TYPE_CHOICE)
 			throw new IllegalStateException("Question.addAnswerChoice may only be called if answer type is Questionnaire.ANSWER_TYPE_CHOICE");
 		choices.put(new Integer(index), new AnswerChoice(index, value, adjacent, textValue));
 	}
@@ -79,32 +79,32 @@ public class Question {
 	//get the value of a specific answer choice 
 	//only allowed if answer typ is Study.ANSWER_TYPE_CHOICE
 	public String answerChoiceTextValue(int index){
-		if(this.answerType != Questionnaire.ANSWER_TYPE_CHOICE)
+		if(this.answerType != InterviewManager.ANSWER_TYPE_CHOICE)
 			throw new IllegalStateException("Question.answerChoiceValue may only be called if answer type is Questionnaire.ANSWER_TYPE_CHOICE");
 		return choices.get(index).textValue();
 	}
 	
 	//only allowed if answer typ is Study.ANSWER_TYPE_CHOICE
 	public boolean answerChoiceAdjacent(int index){
-		if(this.answerType != Questionnaire.ANSWER_TYPE_CHOICE)
+		if(this.answerType != InterviewManager.ANSWER_TYPE_CHOICE)
 			throw new IllegalStateException("Question.answerChoiceValue may only be called if answer type is Questionnaire.ANSWER_TYPE_CHOICE");
 		return choices.get(index).adjacent();
 	}
 	
 	public Set<Integer> answerChoiceIndicees(){
-		if(this.answerType != Questionnaire.ANSWER_TYPE_CHOICE)
+		if(this.answerType != InterviewManager.ANSWER_TYPE_CHOICE)
 			throw new IllegalStateException("Question.answerChoiceValue may only be called if answer type is Questionnaire.ANSWER_TYPE_CHOICE");
 		return choices.keySet();
 	}
 	
 	public HashMap<Integer,AnswerChoice> answerChoices(){
-		if(this.answerType != Questionnaire.ANSWER_TYPE_CHOICE)
+		if(this.answerType != InterviewManager.ANSWER_TYPE_CHOICE)
 			throw new IllegalStateException("Question.answerChoiceValue may only be called if answer type is Questionnaire.ANSWER_TYPE_CHOICE");
 		return choices;
 	}
 	
 	public LinkedHashSet<String> answerChoiceTextValuesAsSet(){
-		if(this.answerType != Questionnaire.ANSWER_TYPE_CHOICE)
+		if(this.answerType != InterviewManager.ANSWER_TYPE_CHOICE)
 			throw new IllegalStateException("Question.answerChoiceValue may only be called if answer type is Questionnaire.ANSWER_TYPE_CHOICE");
 		LinkedHashSet<String> ret = new LinkedHashSet<String>();
 		for(AnswerChoice ac : choices.values()){
@@ -114,7 +114,7 @@ public class Question {
 	}
 	
 	public String[] answerChoiceTextValues(){
-		if(this.answerType != Questionnaire.ANSWER_TYPE_CHOICE)
+		if(this.answerType != InterviewManager.ANSWER_TYPE_CHOICE)
 			throw new IllegalStateException("Question.answerChoiceValue may only be called if answer type is Questionnaire.ANSWER_TYPE_CHOICE");
 		int maxIndex = -1;
 		for(int index : choices.keySet()){

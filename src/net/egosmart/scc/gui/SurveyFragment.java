@@ -8,7 +8,7 @@ import java.util.Set;
 
 import net.egosmart.scc.SCCMainActivity;
 import net.egosmart.scc.collect.Question;
-import net.egosmart.scc.collect.Questionnaire;
+import net.egosmart.scc.collect.InterviewManager;
 import net.egosmart.scc.data.Alter;
 import net.egosmart.scc.data.AlterAlterDyad;
 import net.egosmart.scc.data.Ego;
@@ -60,7 +60,7 @@ public class SurveyFragment extends Fragment {
 		TextView surveyHeadline = (TextView) activity.findViewById(R.id.survey_view_headline_textview);
 		if(surveyHeadline == null)
 			return;
-		final Questionnaire questionnaire = Questionnaire.getInstance(activity);
+		final InterviewManager questionnaire = InterviewManager.getInstance(activity);
 		surveyHeadline.setText(activity.getString(R.string.survey_view_headline) +
 				" " + questionnaire.getName());
 		// show question and potentially answer choices dependent on type
@@ -100,7 +100,7 @@ public class SurveyFragment extends Fragment {
 	}
 
 	private void fillAnswerEditArea(LinearLayout questionContainer) {
-		final Questionnaire questionnaire = Questionnaire.getInstance(activity);
+		final InterviewManager questionnaire = InterviewManager.getInstance(activity);
 		final Question question = questionnaire.getCurrentQuestion();
 		final PersonalNetwork network = PersonalNetwork.getInstance(activity);
 		TextView title = new TextView(activity);
@@ -109,11 +109,11 @@ public class SurveyFragment extends Fragment {
 		questionContainer.addView(title); 
 		TextView text = new TextView(activity);
 		String questionText = question.text();
-		if(question.type() == Questionnaire.Q_ABOUT_ALTERS){
+		if(question.type() == InterviewManager.Q_ABOUT_ALTERS){
 			String altername = questionnaire.getCurrentFirstAlterName();
 			questionText = questionText.replace("$$", altername);
 		}
-		if(question.type() == Questionnaire.Q_ALTER_ALTER_TIES){
+		if(question.type() == InterviewManager.Q_ALTER_ALTER_TIES){
 			String first = questionnaire.getCurrentFirstAlterName();
 			String second = questionnaire.getCurrentSecondAlterName();
 			questionText = questionText + "\n" + "Alter-alter pair: (" +
@@ -122,27 +122,27 @@ public class SurveyFragment extends Fragment {
 		text.setText(questionText);
 		text.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f);
 		questionContainer.addView(text);
-		if(question.type() != Questionnaire.Q_NAME_GENERATOR){
+		if(question.type() != InterviewManager.Q_NAME_GENERATOR){
 			int answerType = question.answerType();
-			if(answerType == Questionnaire.ANSWER_TYPE_TEXT || 
-					answerType == Questionnaire.ANSWER_TYPE_NUMBER){
+			if(answerType == InterviewManager.ANSWER_TYPE_TEXT || 
+					answerType == InterviewManager.ANSWER_TYPE_NUMBER){
 				EditText textAnswer = DynamicViewManager.createSurveyAnswerEditText(activity);
-				if(answerType == Questionnaire.ANSWER_TYPE_TEXT){
+				if(answerType == InterviewManager.ANSWER_TYPE_TEXT){
 					//TODO: choose alternatives
 					//textAnswer.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 					textAnswer.setInputType(InputType.TYPE_CLASS_TEXT);
 				}
-				if(answerType == Questionnaire.ANSWER_TYPE_NUMBER){
+				if(answerType == InterviewManager.ANSWER_TYPE_NUMBER){
 					textAnswer.setInputType(InputType.TYPE_CLASS_NUMBER); 
 				}
 				String currentValue = null;
-				if(question.type() == Questionnaire.Q_ABOUT_EGO)
+				if(question.type() == InterviewManager.Q_ABOUT_EGO)
 					currentValue = network.getAttributeValueAt(System.currentTimeMillis(), question.title(),
 							Ego.getInstance());
-				if(question.type() == Questionnaire.Q_ABOUT_ALTERS)
+				if(question.type() == InterviewManager.Q_ABOUT_ALTERS)
 					currentValue = network.getAttributeValueAt(System.currentTimeMillis(), question.title(),
 							Alter.getInstance(questionnaire.getCurrentFirstAlterName()));;
-				if(question.type() == Questionnaire.Q_ALTER_ALTER_TIES)
+				if(question.type() == InterviewManager.Q_ALTER_ALTER_TIES)
 					currentValue = network.getAttributeValueAt(System.currentTimeMillis(), question.title(), 
 							AlterAlterDyad.getInstance(questionnaire.getCurrentFirstAlterName(), 
 							questionnaire.getCurrentSecondAlterName()));
@@ -154,17 +154,17 @@ public class SurveyFragment extends Fragment {
 			        inputManager.showSoftInput(textAnswer, InputMethodManager.SHOW_IMPLICIT);
 			    }
 			}
-			if(answerType == Questionnaire.ANSWER_TYPE_CHOICE){
+			if(answerType == InterviewManager.ANSWER_TYPE_CHOICE){
 				String[] choices = question.answerChoiceTextValues();
 				RadioGroup choicesGroup = new RadioGroup(activity);
 				String currentValue = null;
-				if(question.type() == Questionnaire.Q_ABOUT_EGO)
+				if(question.type() == InterviewManager.Q_ABOUT_EGO)
 					currentValue = network.getAttributeValueAt(System.currentTimeMillis(), question.title(),
 							Ego.getInstance());
-				if(question.type() == Questionnaire.Q_ABOUT_ALTERS)
+				if(question.type() == InterviewManager.Q_ABOUT_ALTERS)
 					currentValue = network.getAttributeValueAt(System.currentTimeMillis(), question.title(), 
 							Alter.getInstance(questionnaire.getCurrentFirstAlterName()));
-				if(question.type() == Questionnaire.Q_ALTER_ALTER_TIES)
+				if(question.type() == InterviewManager.Q_ALTER_ALTER_TIES)
 					currentValue = network.getAttributeValueAt(System.currentTimeMillis(), question.title(), 
 							AlterAlterDyad.getInstance(questionnaire.getCurrentFirstAlterName(), 
 							questionnaire.getCurrentSecondAlterName()));
@@ -178,17 +178,17 @@ public class SurveyFragment extends Fragment {
 							RadioButton clickedButton = (RadioButton) v;
 							if(clickedButton.isChecked()){
 								String value = clickedButton.getText().toString();
-								if(question.type() == Questionnaire.Q_ABOUT_EGO){
+								if(question.type() == InterviewManager.Q_ABOUT_EGO){
 									network.setAttributeValueAt(TimeInterval.getRightUnboundedFromNow(),
 											question.title(), Ego.getInstance(), value);
 								}
-								if(question.type() == Questionnaire.Q_ABOUT_ALTERS){
+								if(question.type() == InterviewManager.Q_ABOUT_ALTERS){
 									network.setAttributeValueAt(TimeInterval.getRightUnboundedFromNow(),
 											question.title(), 
 											Alter.getInstance(questionnaire.getCurrentFirstAlterName()), 
 											value);
 								}
-								if(question.type() == Questionnaire.Q_ALTER_ALTER_TIES){
+								if(question.type() == InterviewManager.Q_ALTER_ALTER_TIES){
 									//find out whether the value means adjacent or not
 									boolean adjacent = false;
 									Set<Integer> indicees = question.answerChoiceIndicees();

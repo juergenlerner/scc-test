@@ -4,7 +4,7 @@
 package net.egosmart.scc.gui;
 
 import net.egosmart.scc.SCCMainActivity;
-import net.egosmart.scc.collect.Questionnaire;
+import net.egosmart.scc.collect.InterviewManager;
 import net.egosmart.scc.data.SCCProperties;
 import net.egosmart.scc.R;
 import android.app.Activity;
@@ -43,7 +43,7 @@ public class SurveyControlFragment extends Fragment {
 		if(surveyControlHeadline == null)
 			return;
 		surveyControlHeadline.setText(activity.getString(R.string.survey_control_headline) + 
-				" " + Questionnaire.getInstance(activity).getName());
+				" " + InterviewManager.getInstance(activity).getName());
 		
 		Button startSurveyButton = (Button) activity.findViewById(R.id.goto_survey_button);
 		startSurveyButton.setOnClickListener(new OnClickListener() {

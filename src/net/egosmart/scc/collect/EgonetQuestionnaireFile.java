@@ -284,19 +284,19 @@ public class EgonetQuestionnaireFile extends DefaultHandler{
 	
 	private void startQuestionOrderElement(Attributes atts){
 		int question_type = Integer.parseInt(atts.getValue(attr_questiontype));
-		if(question_type == Questionnaire.Q_ABOUT_EGO){
+		if(question_type == InterviewManager.Q_ABOUT_EGO){
 			egoQuestionOrder = new LinkedList<Long>();
 			questionOrderCurrentlyToFillWithIds = egoQuestionOrder;
 		}
-		if(question_type == Questionnaire.Q_NAME_GENERATOR){
+		if(question_type == InterviewManager.Q_NAME_GENERATOR){
 			nameGeneratorQuestionOrder = new LinkedList<Long>();
 			questionOrderCurrentlyToFillWithIds = nameGeneratorQuestionOrder;
 		}
-		if(question_type == Questionnaire.Q_ABOUT_ALTERS){
+		if(question_type == InterviewManager.Q_ABOUT_ALTERS){
 			alterQuestionOrder = new LinkedList<Long>();
 			questionOrderCurrentlyToFillWithIds = alterQuestionOrder;
 		}
-		if(question_type == Questionnaire.Q_ALTER_ALTER_TIES){
+		if(question_type == InterviewManager.Q_ALTER_ALTER_TIES){
 			tieQuestionOrder = new LinkedList<Long>();
 			questionOrderCurrentlyToFillWithIds = tieQuestionOrder;
 		}

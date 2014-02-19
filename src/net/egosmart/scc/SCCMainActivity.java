@@ -7,7 +7,7 @@ import java.util.LinkedHashSet;
 
 import net.egosmart.scc.collect.EgonetQuestionnaireFile;
 import net.egosmart.scc.collect.ImportContentProviderData;
-import net.egosmart.scc.collect.Questionnaire;
+import net.egosmart.scc.collect.InterviewManager;
 import net.egosmart.scc.data.LayoutSQLite;
 import net.egosmart.scc.data.PersonalNetwork;
 import net.egosmart.scc.data.SCCProperties;
@@ -1482,13 +1482,13 @@ android.view.View.OnClickListener {
 	 */
 	public void loadSurveyFromFile(File egoFile){
 		EgonetQuestionnaireFile questionnairefile = new EgonetQuestionnaireFile(egoFile);
-		Questionnaire questionnaire = Questionnaire.getInstance(this);
+		InterviewManager questionnaire = InterviewManager.getInstance(this);
 		questionnaire.initFromFile(questionnairefile);
 		//Enable load interview button after loading the study associated.
 		Button button = (Button) findViewById(R.id.load_interview_button);
 		button.setVisibility(Button.VISIBLE);
-		
-		PersonalNetwork.getInstance(this).setStudyFile(questionnairefile);
+		//Sets the study loaded as the current study.
+		InterviewManager.getInstance(this).setCurrentStudy(questionnairefile);
 		
 		updatePersonalNetworkViews();
 	}
@@ -1609,9 +1609,10 @@ android.view.View.OnClickListener {
 	 * @param intFile
 	 */
 	public void loadInterviewFromFile(File intFile){
-		PersonalNetwork.getInstance(this).importEgonetInterview(intFile);
+		InterviewManager im = InterviewManager.getInstance(this);
+		im.importEgonetInterview(intFile);
 		Toast toast;
-		if(PersonalNetwork.getInstance(this).isInterviewLoaded())
+		if(im.isLastInterviewLoaded())
 			toast = Toast.makeText(this, R.string.correctly_imported_interview_toast, Toast.LENGTH_SHORT);		
 		else
 			toast = Toast.makeText(this, R.string.error_imported_interview_toast, Toast.LENGTH_SHORT);		
@@ -1778,7 +1779,7 @@ android.view.View.OnClickListener {
 				cursor.close();
 				PersonalNetwork network = PersonalNetwork.getInstance(this);
 				network.addToLifetimeOfAlter(TimeInterval.getRightUnboundedFromNow(), alterName);
-				Questionnaire.getInstance(this).addAlter(alterName);
+				InterviewManager.getInstance(this).addAlter(alterName);
 				//do something with the _ID (link it to this alter etc) or with the email ...
 				updatePersonalNetworkViews();
 			}
