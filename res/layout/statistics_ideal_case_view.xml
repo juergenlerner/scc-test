@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:padding="10sp"
         android:layout_marginTop = "-20sp"
-        android:hint="@string/statistics_set_up_ideal_man_hint"
+        android:hint="@string/statistics_set_up_ideal_density_hint"
         android:textColor="#555555"
         android:textSize="22sp"
         />
