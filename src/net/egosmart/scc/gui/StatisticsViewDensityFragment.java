@@ -1,9 +1,13 @@
 package net.egosmart.scc.gui;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParsePosition;
 import java.util.Arrays;
 
 import com.androidplot.xy.BarFormatter;
 import com.androidplot.xy.BarRenderer;
 import com.androidplot.xy.BoundaryMode;
+import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYStepMode;
@@ -52,17 +56,24 @@ public class StatisticsViewDensityFragment extends Fragment {
 		stats.calculateAllStatisticsAt(System.currentTimeMillis());
 		
 		formatter1 = new BarFormatter(Color.argb(200, 100, 150, 100), Color.LTGRAY);
+		formatter1.setPointLabelFormatter(new PointLabelFormatter(Color.DKGRAY));
 		formatter2 = new BarFormatter(Color.argb(200, 100, 100, 150), Color.LTGRAY);
+		formatter2.setPointLabelFormatter(new PointLabelFormatter(Color.DKGRAY));
 		
-		Number[] successCaseArray = {stats.getGraphDensity()};
-		Number[] idealCaseArray = {stats.getIdealGraphDensity()};
+		//Just rounding to 4 decimals.
+		float graphDensity = (float)Math.round(stats.getGraphDensity() * 10000) / 10000;
+		float idealDensity = (float)Math.round(stats.getIdealGraphDensity() * 10000) / 10000;
+		Number[] successCaseArray = {graphDensity};
+		Number[] idealCaseArray = {idealDensity};
+		Number[] xValuesSuccess = {0};
+		Number[] xValuesIdeal = {1};
 		
 		plot = (XYPlot) activity.findViewById(R.id.plotView);
 		
-		SimpleXYSeries successCaseSeries = new SimpleXYSeries(Arrays.asList(successCaseArray), 
-				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, activity.getString(R.string.statistics_success_case_text));
-		SimpleXYSeries idealCaseSeries = new SimpleXYSeries(Arrays.asList(idealCaseArray), 
-				SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, activity.getString(R.string.statistics_ideal_case_text));
+		SimpleXYSeries successCaseSeries = new SimpleXYSeries(Arrays.asList(xValuesSuccess),
+				Arrays.asList(successCaseArray), activity.getString(R.string.statistics_success_case_text));
+		SimpleXYSeries idealCaseSeries = new SimpleXYSeries(Arrays.asList(xValuesIdeal),
+				Arrays.asList(idealCaseArray), activity.getString(R.string.statistics_ideal_case_text));
 		
 		plot.setTitle(activity.getString(R.string.statistics_control_show_density));
 		
@@ -77,16 +88,41 @@ public class StatisticsViewDensityFragment extends Fragment {
 		plot.getGraphWidget().getDomainLabelPaint().setColor(Color.TRANSPARENT);
 		plot.getGraphWidget().getDomainOriginLabelPaint().setColor(Color.TRANSPARENT);
 		
+		plot.getGraphWidget().setRangeValueFormat(new DensityYFormatter());
 		plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
 		plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 0.1);
         plot.setRangeLowerBoundary(0, BoundaryMode.FIXED);
 	    plot.setDomainLowerBoundary(-1, BoundaryMode.FIXED);
-	    plot.setDomainUpperBoundary(1, BoundaryMode.FIXED);
-	    plot.setRangeTopMin(1);
+	    plot.setDomainUpperBoundary(2, BoundaryMode.FIXED);
+	    //1 + 0.1 to allow 1.0 value at the top of bar.
+	    plot.setRangeTopMin(1.05);
 		
 		barRenderer = (BarRenderer) plot.getRenderer(BarRenderer.class);
 		barRenderer.setBarRenderStyle(BarRenderStyle.SIDE_BY_SIDE);
-		barRenderer.setBarWidth(250);  
+		barRenderer.setBarWidth(200);  
 	}	
+	
+	private class DensityYFormatter extends Format {
+
+		@Override
+		public StringBuffer format(Object object, StringBuffer buffer,
+				FieldPosition field) {
+			float parsedFloat = Float.parseFloat(object.toString());
+			String labelString;
+			
+			if(parsedFloat > 1)
+				labelString = "";
+			else 
+				labelString = Float.toString(parsedFloat);
+			buffer.append(labelString);
+			return buffer;
+		}
+
+		@Override
+		public Object parseObject(String arg0, ParsePosition arg1) {
+			return null;
+		}
+		
+	}
 
 }

@@ -16,10 +16,6 @@ public class Statistics {
 	private float weakTiesPercentage;
 	private float strongTiesPercentage;
 	private float graphDensity;
-	//Values for the ideal case.		
-	private float idealManPercentage;
-	private float idealWomanPercentage;
-	private float idealGraphDensity;
 	
 	public Statistics(PersonalNetwork network, SCCMainActivity activity) {
 		this.network = network;
@@ -27,23 +23,19 @@ public class Statistics {
 		//Default values
 		graphDensity = 0;
 		manPercentage = 0;
-		womanPercentage = 0;
-		//Get ideal case from SCCProperties.
-		idealManPercentage = SCCProperties.getInstance(activity).getIdealValueMaleStatistics();
-		idealWomanPercentage = SCCProperties.getInstance(activity).getIdealValueFemaleStatistics();
-		idealGraphDensity = SCCProperties.getInstance(activity).getIdealValueDensityStatistics();		
+		womanPercentage = 0;		
 	}
 	
 	public float getIdealMalePercentage() {
-		return idealManPercentage;
+		return SCCProperties.getInstance(activity).getIdealValueMaleStatistics();
 	}
 	
 	public float getIdealFemalePercentage() {
-		return idealWomanPercentage;
+		return SCCProperties.getInstance(activity).getIdealValueFemaleStatistics();
 	}
 	
 	public float getIdealGraphDensity() {
-		return idealGraphDensity;
+		return SCCProperties.getInstance(activity).getIdealValueDensityStatistics();
 	}
 	
 	public void setIdealGraphDensity(float value) {
@@ -116,10 +108,10 @@ public class Statistics {
 	}
 	
 	public void calculateWeakTiesPercentage(long timePoint) {
-		
+		//TODO:
 	}
 	
 	public void calculateStrongTiesPercentage(long timePoint) {
-		
+		//TODO:
 	}
 }
