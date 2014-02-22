@@ -52,6 +52,7 @@ public class StatisticsViewDensityFragment extends Fragment {
 
 	public void updateView() {
 		activity = (SCCMainActivity) getActivity();
+		//TODO: there is no need to recalculate any stat if the network has not changed.
 		stats = new Statistics(PersonalNetwork.getInstance(activity),activity);
 		stats.calculateAllStatisticsAt(System.currentTimeMillis());
 		

@@ -29,11 +29,11 @@ public class EgonetInterviewFile extends DefaultHandler {
 	
 	PersonalNetwork network;
 	
-	String parsedValue;
-	String alterResponse; //we can't add a reponse of an alter question until we know alter name. 
-	String[] alterPair;
-	boolean areAdjacent;
-	TimeInterval interval;		
+	private String alterResponse; //we can't add a reponse of an alter question until we know alter name. 
+	private String[] alterPair;
+	private boolean areAdjacent;
+	private TimeInterval interval;
+	private StringBuffer curr_pcd;
 	
 	Question currentQuestion;
 	EgonetQuestionnaireFile study;
@@ -53,6 +53,7 @@ public class EgonetInterviewFile extends DefaultHandler {
 			
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException{
+		curr_pcd = new StringBuffer();//empties the current parsed character data
 		if(elem_interview.equals(localName))
 			startInterview(atts);
 		if(elem_alters.equals(localName))
@@ -77,16 +78,13 @@ public class EgonetInterviewFile extends DefaultHandler {
 	
 	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException {
-		//TODO: could it happen that the parser calls characters several times for 'one chunk' of PCDATA?
-		//TODO: maybe it is saver to call StringBuffer.apend(ch, start, length)
-		parsedValue = new String(ch, start,length); 
+		curr_pcd.append(ch, start, length);
 	}
 	
 	private void startInterview (Attributes atts) throws SAXException {
 		//Check if current study matches with the study of interview. 
 		long studyIdFromInterview = Long.valueOf(atts.getValue("", interview_study_id));
 		if(studyIdFromInterview != study.studyId())
-			//intManager.setErrorReasonAtLoad(R.string.error_load_interview_id);
 			throw new SAXException("The study loaded and the study of the interview does not match");	
 	}
 	
@@ -107,26 +105,28 @@ public class EgonetInterviewFile extends DefaultHandler {
 	}
 	
 	private void endQuestionId() {
-		long questionId = Long.valueOf(parsedValue.toString().trim());
+		long questionId = Long.valueOf(curr_pcd.toString().trim());
 		currentQuestion = study.getQuestion(questionId);
 	}
 	
 	private void endString() {
-		String value = parsedValue.toString().trim();
+		String value = curr_pcd.toString().trim();
 		if(currentQuestion.type() == InterviewManager.Q_ABOUT_EGO)
 			network.setAttributeValueAt(TimeInterval.getRightUnboundedFromNow(),
 					currentQuestion.title(), Ego.getInstance(), value);
-		if(currentQuestion.type() == InterviewManager.Q_ABOUT_ALTERS)
+		if(currentQuestion.type() == InterviewManager.Q_ABOUT_ALTERS ||
+				currentQuestion.type() == InterviewManager.Q_ALTER_ALTER_TIES)
 			alterResponse = value;
+			
 	}
 	
 	private void endName() {
-		String alterName = parsedValue.toString().trim(); 
+		String alterName = curr_pcd.toString().trim(); 
 		network.addToLifetimeOfAlter(interval, alterName);
 	}
 			
 	private void endAdjacent() {
-		areAdjacent = Boolean.valueOf(parsedValue.toString().trim()); 
+		areAdjacent = Boolean.valueOf(curr_pcd.toString().trim()); 
 	}	
 	
 	private void endAlters() {

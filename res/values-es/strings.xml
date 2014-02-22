@@ -28,8 +28,8 @@
     <string name="alter_attribute_city_description">Ciudad donde esta persona vive (principalmente).</string>
     <string name="alter_attribute_gender_name">Género</string>
     <string name="alter_attribute_gender_description">Género de este contacto. </string>
-    <string name="alter_attribute_gender_female">mujer</string>
-    <string name="alter_attribute_gender_male">hombre</string>
+    <string name="alter_attribute_gender_female">Mujer</string>
+    <string name="alter_attribute_gender_male">Hombre</string>
     <string name="alter_attribute_occupation_name">Ocupación</string>
     <string name="alter_attribute_occupation_description">Ocupación principal de este contacto. </string>
     <string name="alter_attribute_would_help_actively_name">Apoyo activo</string>

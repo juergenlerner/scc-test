@@ -1610,13 +1610,14 @@ android.view.View.OnClickListener {
 	 */
 	public void loadInterviewFromFile(File intFile){
 		InterviewManager im = InterviewManager.getInstance(this);
-		im.importEgonetInterview(intFile);
-		Toast toast;
-		if(im.isLastInterviewLoaded())
+		PersonalNetwork.getInstance(this).importEgonetInterview(intFile);
+		//im.importEgonetInterview(intFile);
+		//Toast toast;
+		/*if(im.isLastInterviewLoaded())
 			toast = Toast.makeText(this, R.string.correctly_imported_interview_toast, Toast.LENGTH_SHORT);		
 		else
 			toast = Toast.makeText(this, R.string.error_imported_interview_toast, Toast.LENGTH_SHORT);		
-		toast.show();		
+		toast.show();*/		
 	}
 	
 	/**

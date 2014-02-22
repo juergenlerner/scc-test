@@ -119,7 +119,7 @@ public class InterviewManager {
 	
 	private static EgonetQuestionnaireFile currentStudy;
 	private static boolean interviewLoaded;
-
+	
 	private InterviewManager(SCCMainActivity activity){
 		this.activity = activity;
 		QuestionnaireDBOpenHelper helper = new QuestionnaireDBOpenHelper(activity);
@@ -641,36 +641,7 @@ public class InterviewManager {
 		return ret;
 	}
 	
-	/**
-	 * Reads the content of the int file and load its data into application.
-	 * 
-	 * @param file Int file with the Egonet interview.
-	 * @param study Ego file with the definition of the egonet study.
-	 */
-	public void importEgonetInterview(File file){
-		SAXParserFactory saxfactory = SAXParserFactory.newInstance();
-		SAXParser saxparser;
-		try {
-			interviewLoaded = false;
-			saxparser = saxfactory.newSAXParser();
-			DefaultHandler handler = new EgonetInterviewFile(activity);
-			db.beginTransaction();
-			saxparser.parse(file, handler);
-			db.setTransactionSuccessful();
-			interviewLoaded= true;
-		} catch (ParserConfigurationException e) {
-			Log.e("Import int", e.getMessage());
-			e.printStackTrace();
-		} catch (SAXException e) {
-			Log.e("Import int", e.getMessage());
-			e.printStackTrace();
-		} catch (IOException e) {
-			Log.e("Import int", e.getMessage());
-			e.printStackTrace();
-		} finally {
-			db.endTransaction();
-		}
-	}
+	
 
 	public int getNumberOfQuestions(){
 		String selection = PROPERTIES_COL_KEY + " = ?";
