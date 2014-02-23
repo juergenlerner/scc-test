@@ -54,7 +54,7 @@ public class StatisticsViewDensityFragment extends Fragment {
 		activity = (SCCMainActivity) getActivity();
 		//TODO: there is no need to recalculate any stat if the network has not changed.
 		stats = new Statistics(PersonalNetwork.getInstance(activity),activity);
-		stats.calculateAllStatisticsAt(System.currentTimeMillis());
+		stats.calculateGraphDensityAt(System.currentTimeMillis());
 		
 		formatter1 = new BarFormatter(Color.argb(200, 100, 150, 100), Color.LTGRAY);
 		formatter1.setPointLabelFormatter(new PointLabelFormatter(Color.DKGRAY));
