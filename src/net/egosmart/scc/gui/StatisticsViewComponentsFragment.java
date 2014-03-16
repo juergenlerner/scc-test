@@ -29,7 +29,7 @@ import android.view.ViewGroup;
  *
  */
 
-public class StatisticsViewDensityFragment extends Fragment {
+public class StatisticsViewComponentsFragment extends Fragment {
 
 	private SCCMainActivity activity;
 	private Statistics stats;
@@ -54,18 +54,17 @@ public class StatisticsViewDensityFragment extends Fragment {
 		activity = (SCCMainActivity) getActivity();
 		//TODO: there is no need to recalculate any stat if the network has not changed.
 		stats = new Statistics(PersonalNetwork.getInstance(activity),activity);
-		stats.calculateGraphDensityAt(System.currentTimeMillis());
+		stats.calculateComponentsNumber(System.currentTimeMillis());
 		
 		formatter1 = new BarFormatter(Color.argb(200, 100, 150, 100), Color.LTGRAY);
 		formatter1.setPointLabelFormatter(new PointLabelFormatter(Color.DKGRAY));
 		formatter2 = new BarFormatter(Color.argb(200, 100, 100, 150), Color.LTGRAY);
 		formatter2.setPointLabelFormatter(new PointLabelFormatter(Color.DKGRAY));
 		
-		//Just rounding to 4 decimals.
-		float graphDensity = (float)Math.round(stats.getGraphDensity() * 10000) / 10000;
-		float idealDensity = (float)Math.round(stats.getIdealGraphDensity() * 10000) / 10000;
-		Number[] successCaseArray = {graphDensity};
-		Number[] idealCaseArray = {idealDensity};
+		int componentsNumber = stats.getComponentsNumber();
+		int idealComponents = stats.getIdealComponentsNumber();
+		Number[] successCaseArray = {componentsNumber};
+		Number[] idealCaseArray = {idealComponents};
 		Number[] xValuesSuccess = {0};
 		Number[] xValuesIdeal = {1};
 		
@@ -76,7 +75,7 @@ public class StatisticsViewDensityFragment extends Fragment {
 		SimpleXYSeries idealCaseSeries = new SimpleXYSeries(Arrays.asList(xValuesIdeal),
 				Arrays.asList(idealCaseArray), activity.getString(R.string.statistics_ideal_case_text));
 		
-		plot.setTitle(activity.getString(R.string.statistics_control_show_density));
+		plot.setTitle(activity.getString(R.string.statistics_control_show_components));
 		
 		//We don't want to show anything at domain or range label.
 		plot.setDomainLabel("");
@@ -89,21 +88,21 @@ public class StatisticsViewDensityFragment extends Fragment {
 		plot.getGraphWidget().getDomainLabelPaint().setColor(Color.TRANSPARENT);
 		plot.getGraphWidget().getDomainOriginLabelPaint().setColor(Color.TRANSPARENT);
 		
-		plot.getGraphWidget().setDomainValueFormat(new DensityYFormatter());
+		plot.getGraphWidget().setDomainValueFormat(new ComponentsFormatter());
 		plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
-		plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 0.1);
+		plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 0.5);
         plot.setRangeLowerBoundary(0, BoundaryMode.FIXED);
 	    plot.setDomainLowerBoundary(-1, BoundaryMode.FIXED);
 	    plot.setDomainUpperBoundary(2, BoundaryMode.FIXED);
-	    //1 + 0.1 to allow 1.0 value at the top of bar.
-	    plot.setRangeTopMin(1.05);
+	    //1 + 0.1 to see 1.0 value at the top of bar.
+	    //plot.setRangeTopMin(2.1);
 		
 		barRenderer = (BarRenderer) plot.getRenderer(BarRenderer.class);
 		barRenderer.setBarRenderStyle(BarRenderStyle.SIDE_BY_SIDE);
 		barRenderer.setBarWidth(200);  
 	}	
 	
-	private class DensityYFormatter extends Format {
+	private class ComponentsFormatter extends Format {
 
 		@Override
 		public StringBuffer format(Object object, StringBuffer buffer,

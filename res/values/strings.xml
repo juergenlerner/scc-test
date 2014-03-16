@@ -205,10 +205,12 @@
     <string name="statistics_control_text">Statistics</string>
     <string name="statistics_control_show_gender">Gender statistics</string>
     <string name="statistics_control_show_density">Density statistics</string>
+    <string name="statistics_control_show_components">Connected components</string>
     <string name="statistics_control_ideal_case_text">Set ideal case</string>
     <string name="statistics_set_up_ideal_man_hint">Ideal man percentatge</string>
     <string name="statistics_set_up_ideal_woman_hint">Ideal woman percentatge</string>
     <string name="statistics_set_up_ideal_density_hint">Ideal graph density</string>
+    <string name="statistics_set_up_ideal_components_hint">Ideal connected components</string>
     <string name="statistics_set_up_button_text">Update ideal case</string>
     <string name="statistics_success_case_text">Success case</string>
     <string name="statistics_ideal_case_text">Ideal case</string>

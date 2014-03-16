@@ -120,7 +120,10 @@ public class SCCProperties {
 	 * Key to address the ideal graph density statistic.
 	 */
 	private static final String KEY_STATISTIC_IDEAL_GRAPH_DENSITY = "key_statistic_ideal_graph_density";
-	
+	/*
+	 * Key to address the ideal components statistic.
+	 */
+	private static final String KEY_STATISTIC_IDEAL_COMPONENTS = "key_statistic_ideal_components";
 	/*
 	 * Values for boolean properties.
 	 */
@@ -530,6 +533,59 @@ public class SCCProperties {
 		return getFloatStatisticProperty(KEY_STATISTIC_IDEAL_GRAPH_DENSITY);
 	}
 	
+	/**
+	 * Returns the current ideal graph components in database.
+	 * 
+	 */
+	public int getIdealValueComponentsStatistics() {
+		return getIntStatisticProperty(KEY_STATISTIC_IDEAL_COMPONENTS);
+	}
+	
+	/**
+	 * Sets the ideal value to number of components
+	 * 
+	 * @param value
+	 */
+	public void setIdealValueComponentsStatistics (int value) {
+		setIntStatisticProperty(KEY_STATISTIC_IDEAL_COMPONENTS, value);
+	}
+
+	/*
+	 * Sets the given int property to the given label in statistic properties
+	 */
+	private void setIntStatisticProperty(String propertyKey, int value){
+        ContentValues values = new ContentValues();
+        values.put(STATISTICS_PROPERTIES_COL_KEY, propertyKey);
+        values.put(STATISTICS_PROPERTIES_COL_VALUE, Integer.toString(value));
+        String where = STATISTICS_PROPERTIES_COL_KEY + " = ?";
+        String[] whereArgs = {propertyKey};
+        Cursor c = database.query(STATISTICS_PROPERTIES_TABLE_NAME, new String[]{STATISTICS_PROPERTIES_COL_VALUE}, 
+        		where, whereArgs, null, null, null);
+		if(c.moveToFirst()) //value is already set --> update
+			database.update(STATISTICS_PROPERTIES_TABLE_NAME, values, where, whereArgs);
+		else
+			database.insert(STATISTICS_PROPERTIES_TABLE_NAME, null, values);
+		c.close();
+	}
+	
+	/*
+	 * Returns the value of the given int property in statistics properties.
+	 */
+	private int getIntStatisticProperty(String propertyKey){
+        String where = STATISTICS_PROPERTIES_COL_KEY + " = ?";
+        String[] whereArgs = {propertyKey};
+        Cursor c = database.query(STATISTICS_PROPERTIES_TABLE_NAME, new String[]{STATISTICS_PROPERTIES_COL_VALUE}, 
+        		where, whereArgs, null, null, null);
+		if(!c.moveToFirst()){
+			c.close();
+			//TODO: That makes sense?
+			return 0;
+		}
+		int ret = c.getInt(c.getColumnIndexOrThrow(STATISTICS_PROPERTIES_COL_VALUE));
+		c.close();
+		return ret;
+	}
+	
 	/*
 	 * Sets the given float property to the given label in statistic properties
 	 */
@@ -700,6 +756,8 @@ public class SCCProperties {
 	        setInitialStatisticProperty(KEY_STATISTIC_IDEAL_FEMALE, "0.5", db);
 	        //initial ideal graph density
 	        setInitialStatisticProperty(KEY_STATISTIC_IDEAL_GRAPH_DENSITY, "0.5", db);
+	        //initial ideal components
+	        setInitialStatisticProperty(KEY_STATISTIC_IDEAL_COMPONENTS, "2", db);
 	    }
 
 		@Override

@@ -25,6 +25,7 @@ import net.egosmart.scc.gui.NetworkViewFragment;
 import net.egosmart.scc.gui.SearchControlFragment;
 import net.egosmart.scc.gui.SearchViewFragment;
 import net.egosmart.scc.gui.StatisticsControlFragment;
+import net.egosmart.scc.gui.StatisticsViewComponentsFragment;
 import net.egosmart.scc.gui.StatisticsViewDensityFragment;
 import net.egosmart.scc.gui.StatisticsViewGenderFragment;
 import net.egosmart.scc.gui.StatisticsViewIdealCaseFragment;
@@ -127,6 +128,7 @@ android.view.View.OnClickListener {
 	public static final String STATISTICS_CONTROL = "statistics_control";
 	public static final String STATISTICS_GENDER = "statistics_gender";
 	public static final String STATISTICS_DENSITY = "statistics_density";
+	public static final String STATISTICS_COMPONENTS = "statistics_components";
 	public static final String STATISTICS_IDEAL_CASE = "statistics_ideal_case";
 
 	/*
@@ -147,6 +149,7 @@ android.view.View.OnClickListener {
 	private static final String STATISTICS_CONTROL_FRAGMENT_TAG = "statistics_control_fragment_tag";
 	private static final String STATISTICS_VIEW_GENDER_FRAGMENT_TAG = "statistics_view_gender_fragment_tag";
 	private static final String STATISTICS_VIEW_DENSITY_FRAGMENT_TAG = "statistics_view_density_fragment_tag";
+	private static final String STATISTICS_VIEW_COMPONENTS_FRAGMENT_TAG = "statistics_view_componenets_fragment_tag";
 	private static final String STATISTICS_VIEW_IDEAL_CASE_FRAGMENT_TAG = "statistics_view_ideal_case_fragment_tag";
 	private static final String SURVEY_CONTROL_FRAGMENT_TAG = "survey_control_fragment_tag";
 	private static final String SURVEY_FRAGMENT_TAG = "survey_fragment_tag";
@@ -772,6 +775,11 @@ android.view.View.OnClickListener {
 				if(!fragment.isVisible())
 					trans.replace(R.id.detail_container, fragment, STATISTICS_VIEW_DENSITY_FRAGMENT_TAG);
 			}
+			else if(statisticsFragment.equals(STATISTICS_COMPONENTS)){
+				StatisticsViewComponentsFragment fragment = new StatisticsViewComponentsFragment();
+				if(!fragment.isVisible())
+					trans.replace(R.id.detail_container, fragment, STATISTICS_VIEW_COMPONENTS_FRAGMENT_TAG);
+			}
 			else if(statisticsFragment.equals(STATISTICS_IDEAL_CASE)){
 				StatisticsViewIdealCaseFragment fragment = new StatisticsViewIdealCaseFragment();
 				// Replace the statistics fragment in the 'view_container' FrameLayout
@@ -795,6 +803,11 @@ android.view.View.OnClickListener {
 					Fragment fragment = new StatisticsViewDensityFragment();
 					if(!fragment.isVisible())
 						trans.replace(R.id.single_pane_container, fragment, STATISTICS_VIEW_DENSITY_FRAGMENT_TAG);
+				} 
+				else if (statisticsFragment.equals(STATISTICS_COMPONENTS)) {
+					Fragment fragment = new StatisticsViewComponentsFragment();
+					if(!fragment.isVisible())
+						trans.replace(R.id.single_pane_container, fragment, STATISTICS_VIEW_COMPONENTS_FRAGMENT_TAG);
 				} 
 				else if (statisticsFragment.equals(STATISTICS_IDEAL_CASE)) {
 					Fragment fragment = new StatisticsViewIdealCaseFragment();
@@ -1219,6 +1232,18 @@ android.view.View.OnClickListener {
 	public void showDensityStatisticsFromStatisticsControl(View view){
 		SCCProperties.getInstance(this).setPropertyShowDetailInSinglePaneView(true);
 		SCCProperties.getInstance(this).setPropertyLastStatisticView(STATISTICS_DENSITY);
+		switchToStatisticsView();
+	}
+	/**
+	 * Shows density statistics in the single pane.
+	 * 
+	 * Called from show density statistics button in the statistics control view.
+	 * 
+	 * @param view 
+	 */
+	public void showComponentsStatisticsFromStatisticsControl(View view){
+		SCCProperties.getInstance(this).setPropertyShowDetailInSinglePaneView(true);
+		SCCProperties.getInstance(this).setPropertyLastStatisticView(STATISTICS_COMPONENTS);
 		switchToStatisticsView();
 	}
 	/**

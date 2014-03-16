@@ -204,10 +204,12 @@
     <string name="statistics_control_text">Estadísticas</string>
     <string name="statistics_control_show_gender">Estadísticas sobre género</string>
     <string name="statistics_control_show_density">Estadísticas sobre densidad</string>
+    <string name="statistics_control_show_components">Número de componentes</string>
     <string name="statistics_control_ideal_case_text">Definir caso ideal</string>
     <string name="statistics_set_up_ideal_man_hint">Porcentaje masculino ideal</string>
     <string name="statistics_set_up_ideal_woman_hint">Porcentaje femenino ideal</string>
     <string name="statistics_set_up_ideal_density_hint">Densidad ideal</string>
+    <string name="statistics_set_up_ideal_components_hint">Número de componentes ideal</string>
     <string name="statistics_set_up_button_text">Actualizar caso ideal</string>
     <string name="statistics_success_case_text">Caso de éxito</string>
     <string name="statistics_ideal_case_text">Caso ideal</string>

@@ -26,6 +26,13 @@
         android:onClick="showDensityStatisticsFromStatisticsControl"
         />
     <Button
+        android:id="@+id/statistics_control_components_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/statistics_control_show_components" 
+        android:onClick="showComponentsStatisticsFromStatisticsControl"
+        />
+    <Button
         android:id="@+id/statistics_control_ideal_case_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -16,6 +16,7 @@ public class Statistics {
 	private float weakTiesPercentage;
 	private float strongTiesPercentage;
 	private float graphDensity;
+	private int componentsNumber;
 	
 	public Statistics(PersonalNetwork network, SCCMainActivity activity) {
 		this.network = network;
@@ -23,7 +24,8 @@ public class Statistics {
 		//Default values
 		graphDensity = 0;
 		manPercentage = 0;
-		womanPercentage = 0;		
+		womanPercentage = 0;	
+		componentsNumber = 0;
 	}
 	
 	public float getIdealMalePercentage() {
@@ -38,6 +40,10 @@ public class Statistics {
 		return SCCProperties.getInstance(activity).getIdealValueDensityStatistics();
 	}
 	
+	public int getIdealComponentsNumber() { 
+		return SCCProperties.getInstance(activity).getIdealValueComponentsStatistics();
+	}
+	
 	public void setIdealGraphDensity(float value) {
 		SCCProperties.getInstance(activity).setIdealValueDensityStatistics(value);
 	}
@@ -48,6 +54,10 @@ public class Statistics {
 	
 	public void setIdealMalePercentage(float value) {
 		SCCProperties.getInstance(activity).setIdealValueMaleStatistics(value);
+	}
+	
+	public void setIdealComponentsNumber(int value) {
+		SCCProperties.getInstance(activity).setIdealValueComponentsStatistics(value); 
 	}
 	
 	public float getMalePercentage() {
@@ -70,6 +80,10 @@ public class Statistics {
 		return graphDensity;
 	}
 
+	public int getComponentsNumber() {
+		return componentsNumber;
+	}
+	
 	public void calculateAllStatisticsAt(long timePoint) {
 		calculateGraphDensityAt(timePoint);
 		calculateGenderPercentageAt(timePoint);
@@ -105,6 +119,10 @@ public class Statistics {
 		float numberOfVertices = network.getAltersAt(interval).size();
 		if(numberOfVertices > 0)
 			graphDensity = (2*numberOfEdges)/(numberOfVertices*(numberOfVertices-1));
+	}
+	
+	public void calculateComponentsNumber(long timePoint) {
+		//TODO: algorithm
 	}
 	
 	public void calculateWeakTiesPercentage(long timePoint) {
