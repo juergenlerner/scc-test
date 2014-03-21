@@ -17,6 +17,7 @@ public class Statistics {
 	private float strongTiesPercentage;
 	private float graphDensity;
 	private int componentsNumber;
+	private float betweenness; 
 	
 	public Statistics(PersonalNetwork network, SCCMainActivity activity) {
 		this.network = network;
@@ -26,6 +27,7 @@ public class Statistics {
 		manPercentage = 0;
 		womanPercentage = 0;	
 		componentsNumber = 0;
+		betweenness = 0;
 	}
 	
 	public float getIdealMalePercentage() {
@@ -44,6 +46,10 @@ public class Statistics {
 		return SCCProperties.getInstance(activity).getIdealValueComponentsStatistics();
 	}
 	
+	public float getIdealBetweenness() {
+		return SCCProperties.getInstance(activity).getIdealValueBetweennessStatistics();
+	}
+	
 	public void setIdealGraphDensity(float value) {
 		SCCProperties.getInstance(activity).setIdealValueDensityStatistics(value);
 	}
@@ -58,6 +64,10 @@ public class Statistics {
 	
 	public void setIdealComponentsNumber(int value) {
 		SCCProperties.getInstance(activity).setIdealValueComponentsStatistics(value); 
+	}
+	
+	public void setIdealBetweenness(float value) {
+		SCCProperties.getInstance(activity).setIdealValueBetweennessStatistics(value);
 	}
 	
 	public float getMalePercentage() {
@@ -84,11 +94,17 @@ public class Statistics {
 		return componentsNumber;
 	}
 	
+	public float getBetweenness() {
+		return betweenness;
+	}
+	
 	public void calculateAllStatisticsAt(long timePoint) {
 		calculateGraphDensityAt(timePoint);
 		calculateGenderPercentageAt(timePoint);
 		calculateWeakTiesPercentage(timePoint);
 		calculateStrongTiesPercentage(timePoint);
+		calculateBetweenness(timePoint);
+		calculateComponentsNumber(timePoint);
 	}
 	
 	public void calculateGenderPercentageAt(long timePoint) {
@@ -131,5 +147,9 @@ public class Statistics {
 	
 	public void calculateStrongTiesPercentage(long timePoint) {
 		//TODO:
+	}
+	
+	public void calculateBetweenness(long timePoint) {
+		//TODO: algorithm
 	}
 }

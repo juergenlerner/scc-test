@@ -125,6 +125,10 @@ public class SCCProperties {
 	 */
 	private static final String KEY_STATISTIC_IDEAL_COMPONENTS = "key_statistic_ideal_components";
 	/*
+	 * Key to address the ideal betweenness.
+	 */
+	private static final String KEY_STATISTIC_IDEAL_BETWEENNESS = "key_statistic_ideal_betweenness";
+	/*
 	 * Values for boolean properties.
 	 */
 	private static final String VALUE_TRUE = "true";
@@ -550,6 +554,23 @@ public class SCCProperties {
 		setIntStatisticProperty(KEY_STATISTIC_IDEAL_COMPONENTS, value);
 	}
 
+	/**
+	 * Returns the current ideal graph components in database.
+	 * 
+	 */
+	public float getIdealValueBetweennessStatistics() {
+		return getFloatStatisticProperty(KEY_STATISTIC_IDEAL_BETWEENNESS);
+	}
+	
+	/**
+	 * Sets the ideal value to number of components
+	 * 
+	 * @param value
+	 */
+	public void setIdealValueBetweennessStatistics (float value) {
+		setFloatStatisticProperty(KEY_STATISTIC_IDEAL_BETWEENNESS, value);
+	}
+	
 	/*
 	 * Sets the given int property to the given label in statistic properties
 	 */
@@ -758,6 +779,8 @@ public class SCCProperties {
 	        setInitialStatisticProperty(KEY_STATISTIC_IDEAL_GRAPH_DENSITY, "0.5", db);
 	        //initial ideal components
 	        setInitialStatisticProperty(KEY_STATISTIC_IDEAL_COMPONENTS, "2", db);
+	        //initial ideal betweeness
+	        setInitialStatisticProperty(KEY_STATISTIC_IDEAL_BETWEENNESS, "0.5", db);
 	    }
 
 		@Override

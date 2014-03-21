@@ -24,6 +24,7 @@ public class StatisticsViewIdealCaseFragment extends Fragment {
 	private EditText idealFemale;
 	private EditText idealDensity;
 	private EditText idealComponents;
+	private EditText idealBetweenness;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -45,6 +46,7 @@ public class StatisticsViewIdealCaseFragment extends Fragment {
 		idealFemale = (EditText) activity.findViewById(R.id.ideal_woman_percentatge_edit_text);
 		idealDensity = (EditText) activity.findViewById(R.id.ideal_density_percentatge_edit_text);
 		idealComponents = (EditText) activity.findViewById(R.id.ideal_components_edit_text);
+		idealBetweenness = (EditText) activity.findViewById(R.id.ideal_betweenness_edit_text);
 		//Sets every edit text with the current ideal values, and only allows numeric input.
 		idealMale.setText(Float.toString(stats.getIdealMalePercentage()));
 		idealMale.setRawInputType(Configuration.KEYBOARD_12KEY);
@@ -52,8 +54,10 @@ public class StatisticsViewIdealCaseFragment extends Fragment {
 		idealFemale.setRawInputType(Configuration.KEYBOARD_12KEY);
 		idealDensity.setText(Float.toString(stats.getIdealGraphDensity()));
 		idealDensity.setRawInputType(Configuration.KEYBOARD_12KEY);
-		idealComponents.setText(Float.toString(stats.getIdealComponentsNumber()));
+		idealComponents.setText(Integer.toString(stats.getIdealComponentsNumber()));
 		idealComponents.setRawInputType(Configuration.KEYBOARD_12KEY);
+		idealBetweenness.setText(Float.toString(stats.getIdealBetweenness()));
+		idealBetweenness.setRawInputType(Configuration.KEYBOARD_12KEY);
 		updateButton = (Button) activity.findViewById(R.id.update_ideal_case_button);
 		updateButton.setOnClickListener(new OnClickListener(){
 			@Override
@@ -73,6 +77,7 @@ public class StatisticsViewIdealCaseFragment extends Fragment {
 			stats.setIdealMalePercentage(Float.parseFloat(idealMale.getText().toString()));
 			stats.setIdealGraphDensity(Float.parseFloat(idealDensity.getText().toString()));
 			stats.setIdealComponentsNumber(Integer.parseInt(idealComponents.getText().toString()));
+			stats.setIdealBetweenness(Float.parseFloat(idealBetweenness.getText().toString()));
 			toast = Toast.makeText(activity, R.string.correctly_updated_ideal_case_toast, Toast.LENGTH_SHORT);
 			toast.show();
 		}catch(Exception e){
