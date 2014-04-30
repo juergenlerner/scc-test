@@ -1,10 +1,13 @@
 package net.egosmart.scc.data;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import net.egosmart.scc.R;
 import net.egosmart.scc.SCCMainActivity;
+import net.egosmart.scc.algo.BetweennessCentralityAlgo;
 
 public class Statistics {
 	//References 
@@ -150,6 +153,26 @@ public class Statistics {
 	}
 	
 	public void calculateBetweenness(long timePoint) {
-		//TODO: algorithm
+		TimeInterval interval = TimeInterval.getTimePoint(timePoint);
+		HashMap<String, HashSet<String>> neighborhoods = new HashMap<String, HashSet<String>>();
+		for(String alter : network.getAltersAt(interval)){
+			neighborhoods.put(alter, network.getNeighborsAt(interval, alter));
+		}
+		HashMap<String, Double> centralities = BetweennessCentralityAlgo.computeBetweenness(neighborhoods);
+		//TODO: find out whether this is correct:
+		//compute \sum_i(c_max - c_i)/(c_max*n)
+		double sum = 0.0;
+		double max = 0.0;
+		for(String a : centralities.keySet()){
+			double c = centralities.get(a);
+			sum = sum + c;
+			if(c > max)
+				max = c;
+		}
+		double n = network.getNumberOfAltersAt(interval);
+		if(max > 0.0){
+			sum = (max - sum/n)/max; 
+		}
+		betweenness = (float) sum;
 	}
 }
