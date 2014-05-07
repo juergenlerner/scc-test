@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import net.egosmart.scc.R;
 import net.egosmart.scc.SCCMainActivity;
 import net.egosmart.scc.algo.BetweennessCentralityAlgo;
+import net.egosmart.scc.algo.ConnectedComponentsAlgo;
 
 public class Statistics {
 	//References 
@@ -141,7 +142,12 @@ public class Statistics {
 	}
 	
 	public void calculateComponentsNumber(long timePoint) {
-		//TODO: algorithm
+		TimeInterval interval = TimeInterval.getTimePoint(timePoint);
+		HashMap<String, HashSet<String>> neighborhoods = new HashMap<String, HashSet<String>>();
+		for(String alter : network.getAltersAt(interval)){
+			neighborhoods.put(alter, network.getNeighborsAt(interval, alter));
+		}
+		componentsNumber = ConnectedComponentsAlgo.computeNumberOfComponents(neighborhoods);
 	}
 	
 	public void calculateWeakTiesPercentage(long timePoint) {
